@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="es"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_stack" name="shell-type"/><title>Slice - Finanzas</title><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base { html, body { width: 100%; min-height: 100%; margin: 0; padding: 0; background-color: #131313; } body { overscroll-behavior: none; } .pb-safe { padding-bottom: env(safe-area-inset-bottom, 34px); } .pt-safe { padding-top: env(safe-area-inset-top, 44px); } main > :first-child { margin-top: 0 !important; } main > :last-child { margin-bottom: 0 !important; } } ::-webkit-scrollbar { display: none; }</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { colors: { "tertiary-fixed-dim": "#c8c5ca", "outline": "#8e9192", "on-tertiary": "#303033", "on-primary-fixed": "#1a1c1c", "surface-variant": "#353535", "surface-container": "#1f1f1f", "inverse-surface": "#e2e2e2", "error": "#ffb4ab", "error-container": "#93000a", "on-error-container": "#ffdad6", "on-secondary-fixed": "#1a1c1e", "primary-fixed-dim": "#c6c6c7", "surface-container-lowest": "#0e0e0e", "on-surface-variant": "#c4c7c8", "on-primary-container": "#636565", "on-primary-fixed-variant": "#454747", "surface-bright": "#393939", "surface-container-highest": "#353535", "inverse-on-surface": "#303030", "on-tertiary-container": "#656467", "secondary": "#c6c6c9", "inverse-primary": "#5d5f5f", "surface-tint": "#c6c6c7", "on-primary": "#2f3131", "secondary-fixed-dim": "#c6c6c9", "primary-container": "#e2e2e2", "tertiary-container": "#e4e1e6", "outline-variant": "#444748", "background": "#131313", "surface-container-low": "#1b1b1b", "primary": "#ffffff", "on-error": "#690005", "surface": "#131313", "on-secondary-fixed-variant": "#454749", "on-tertiary-fixed": "#1b1b1e", "on-secondary": "#2f3033", "secondary-container": "#4a4b4e", "secondary-fixed": "#e2e2e5", "on-surface": "#e2e2e2", "primary-fixed": "#e2e2e2", "on-tertiary-fixed-variant": "#47464a", "tertiary": "#ffffff", "surface-dim": "#131313", "tertiary-fixed": "#e4e1e6", "on-secondary-container": "#bbbbbe", "surface-container-high": "#2a2a2a", "on-background": "#e2e2e2" }, borderRadius: { "DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px" }, spacing: { "gutter": "1rem", "margin-safe-bottom": "2.125rem", "margin": "1.25rem", "space-sm": "0.5rem", "margin-safe-top": "2.75rem", "space-xs": "0.25rem", "space-md": "1rem", "gutter-compact": "0.75rem", "space-lg": "1.5rem", "space-xl": "2rem" }, fontFamily: { "body-md": ["Inter"], "headline-md": ["Inter"], "display-hero-mobile": ["Inter"], "label-sm": ["Inter"], "display-hero": ["Inter"], "headline-sm": ["Inter"], "title-md": ["Inter"], "headline-lg": ["Inter"], "body-lg": ["Inter"], "currency-stat": ["Inter"], "label-md": ["Inter"] }, fontSize: { "body-md": ["15px", { "lineHeight": "20px", "letterSpacing": "0em", "fontWeight": "400" }], "headline-md": ["24px", { "lineHeight": "30px", "letterSpacing": "-0.02em", "fontWeight": "600" }], "display-hero-mobile": ["38px", { "lineHeight": "44px", "letterSpacing": "-0.03em", "fontWeight": "600" }], "label-sm": ["11px", { "lineHeight": "14px", "letterSpacing": "0.04em", "fontWeight": "600" }], "display-hero": ["44px", { "lineHeight": "52px", "letterSpacing": "-0.03em", "fontWeight": "600" }], "headline-sm": ["20px", { "lineHeight": "26px", "letterSpacing": "-0.015em", "fontWeight": "500" }], "title-md": ["17px", { "lineHeight": "22px", "letterSpacing": "-0.01em", "fontWeight": "600" }], "headline-lg": ["32px", { "lineHeight": "38px", "letterSpacing": "-0.025em", "fontWeight": "600" }], "body-lg": ["17px", { "lineHeight": "24px", "letterSpacing": "-0.005em", "fontWeight": "400" }], "currency-stat": ["28px", { "lineHeight": "34px", "letterSpacing": "-0.02em", "fontWeight": "600" }], "label-md": ["13px", { "lineHeight": "18px", "letterSpacing": "0.01em", "fontWeight": "500" }] } } } };</script><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head><body class="bg-surface font-body-md text-on-surface flex flex-col min-h-screen selection:bg-white/20 selection:text-white antialiased"><header class="fixed top-0 inset-x-0 z-50 pt-safe bg-surface/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="w-full px-margin h-11 flex items-center justify-between text-primary font-headline-sm text-label-md select-none"><span class="font-semibold tracking-tight">9:41</span><div class="flex items-center gap-1.5"><span class="material-symbols-outlined text-[17px] leading-none">signal_cellular_4_bar</span><span class="material-symbols-outlined text-[17px] leading-none">wifi</span><span class="material-symbols-outlined text-[20px] leading-none">battery_full</span></div></div><div class="h-16 px-margin flex items-center justify-between"><div class="flex items-center gap-2"><button class="w-11 h-11 -ml-2 rounded-full flex items-center justify-center text-primary active:bg-white/10 transition-colors" onclick="history.back()"><span class="material-symbols-outlined text-[22px]">arrow_back_ios_new</span></button><img alt="Slice Brand Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/ALJJyrCXNUoRrYShPH44TPB0m7F_X2o2OSLtnlK4YKTXFeWYO3YQnkyQwT1p3lK94zRWMDlYd0yUfJpsE53Qzgsdq2HGxYYvFhsgFY_lsdt9fcDuO7n-IRKWnh-HjceQ2sfpfEJBeiMITBwyUppJO5HiYLxY4wbrhyLb9t-pNdCGXzQGbj0nhBj1yJVwv-zHZPEEiGKF7No9a1cMid6NI1okl5jRrElkrxVuz2sG9FNSn2Ge"/><h1 class="font-title-md text-title-md text-primary tracking-tight">Nuevo Movimiento</h1></div><div class="flex items-center"><img alt="Profile" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBhH4yJIAUDYYskxiKXWYAZX06svJfcKaFbw7mi_eLOJgpKeaMeKNYHXTPIrySTvDn3kDAJIFWxZLZ7exxEy3p6LiBdo2UEKVr5SuNg4dxNv6ghct0sTppOvAZgmUj2KNRgkI51PYJK3rvde3siQZQCRqzLoOwnMKOlyNSsJM9-Y1Pg7f7Lm16Sv7nzfpkcW8kI1IbvOxf_ls9bXuGj83YhTpzPk9g0bhOZQEBeJ3M"/></div></div></header><main class="flex-1 flex flex-col relative w-full px-margin pt-27 pb-16 bg-surface"><div class="flex flex-col w-full relative">
+<!-- Backdrop Blur Layer representing the bottom sheet overlay context -->
+<div class="fixed inset-0 bg-surface-container-lowest/80 backdrop-blur-2xl z-40 pointer-events-auto transition-opacity duration-300"></div>
+<!-- Bottom Sheet Container -->
+<section class="relative z-50 flex flex-col w-full bg-surface-container-low rounded-t-lg shadow-2xl overflow-hidden pb-10">
+<!-- Drag Handle & Ambient Light Spot -->
+<div class="relative w-full flex flex-col items-center pt-3 pb-2">
+<div class="absolute -top-12 inset-x-12 h-20 bg-primary/10 rounded-full blur-xl pointer-events-none"></div>
+<div class="w-10 h-1.5 bg-primary/30 rounded-full"></div>
+</div>
+<!-- Sheet Header Actions -->
+<header class="w-full px-margin h-12 flex items-center justify-between">
+<button class="px-3.5 py-1.5 rounded-full bg-surface-container-high/60 backdrop-blur-md text-on-surface-variant font-label-md text-label-md active:scale-95 transition-transform flex items-center gap-1" type="button">
+        Cancelar
+      </button>
+<span class="font-headline-sm text-headline-sm text-primary tracking-tight">
+        Nuevo Registro
+      </span>
+<button class="px-3.5 py-1.5 rounded-full bg-primary text-on-primary font-label-md text-label-md font-semibold shadow-md active:scale-95 transition-transform" type="button">
+        Listo
+      </button>
+</header>
+<!-- Scrollable Sheet Workspace -->
+<div class="flex flex-col w-full px-margin gap-5 pt-3 pb-4 overflow-y-auto max-h-[663px]">
+<!-- Big Hero Amount Display -->
+<div class="flex flex-col items-center justify-center py-4 bg-surface-container/60 backdrop-blur-xl rounded-xl relative shadow-sm">
+<div class="flex items-center gap-1.5 mb-1 px-3 py-1 rounded-full bg-surface-container-high/80 text-on-surface-variant">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-primary">MXN</span>
+<span class="material-symbols-outlined text-[14px]">expand_more</span>
+</div>
+<div class="flex items-baseline justify-center tracking-tight text-primary font-display-hero-mobile text-display-hero-mobile font-semibold select-none tabular-nums">
+<span class="text-on-surface-variant/80 font-normal mr-1">$</span>
+<span id="display-amount">0.00</span>
+<span class="w-0.5 h-8 bg-primary ml-1 animate-pulse rounded-full inline-block align-middle"></span>
+</div>
+<p class="font-label-sm text-label-sm text-outline mt-1.5 tracking-wide uppercase">
+          Toca el teclado para ingresar
+        </p>
+</div>
+<!-- Segmented Control (iOS Monochrome Pill) -->
+<nav aria-label="Tipo de transacción" class="w-full bg-surface-container-lowest p-1 rounded-full flex items-center gap-1 overflow-x-auto shadow-inner">
+<button class="seg-btn flex-1 min-w-[70px] py-2 rounded-full text-center font-label-md text-label-md font-semibold bg-primary text-on-primary shadow-sm transition-all" data-type="expense" type="button">
+          Gasto
+        </button>
+<button class="seg-btn flex-1 min-w-[70px] py-2 rounded-full text-center font-label-md text-label-md font-medium text-on-surface-variant hover:text-primary transition-all" data-type="income" type="button">
+          Ingreso
+        </button>
+<button class="seg-btn flex-1 min-w-[70px] py-2 rounded-full text-center font-label-md text-label-md font-medium text-on-surface-variant hover:text-primary transition-all" data-type="card" type="button">
+          Tarjeta
+        </button>
+<button class="seg-btn flex-1 min-w-[70px] py-2 rounded-full text-center font-label-md text-label-md font-medium text-on-surface-variant hover:text-primary transition-all" data-type="msi" type="button">
+          MSI
+        </button>
+<button class="seg-btn flex-1 min-w-[80px] py-2 rounded-full text-center font-label-md text-label-md font-medium text-on-surface-variant hover:text-primary transition-all" data-type="refund" type="button">
+          Reembolso
+        </button>
+</nav>
+<!-- Account Selector Pills -->
+<div class="flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-outline">Cuenta / Origen</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-0.5">
+            Saldo: $24,850.00
+          </span>
+</div>
+<div class="flex items-center gap-2 overflow-x-auto pb-1 -mx-margin px-margin">
+<button class="account-pill flex items-center gap-2 px-3.5 py-2.5 rounded-full bg-primary text-on-primary font-label-md text-label-md font-semibold shrink-0 shadow-sm active:scale-95 transition-all" type="button">
+<span class="material-symbols-outlined text-[18px]">account_balance_wallet</span>
+<span>Plata Débito</span>
+</button>
+<button class="account-pill flex items-center gap-2 px-3.5 py-2.5 rounded-full bg-surface-container text-on-surface-variant font-label-md text-label-md font-medium shrink-0 active:scale-95 transition-all" type="button">
+<span class="material-symbols-outlined text-[18px]">payments</span>
+<span>Efectivo</span>
+</button>
+<button class="account-pill flex items-center gap-2 px-3.5 py-2.5 rounded-full bg-surface-container text-on-surface-variant font-label-md text-label-md font-medium shrink-0 active:scale-95 transition-all" type="button">
+<span class="material-symbols-outlined text-[18px]">bolt</span>
+<span>Mercado Pago</span>
+</button>
+<button class="account-pill flex items-center gap-2 px-3.5 py-2.5 rounded-full bg-surface-container text-on-surface-variant font-label-md text-label-md font-medium shrink-0 active:scale-95 transition-all" type="button">
+<span class="material-symbols-outlined text-[18px]">credit_card</span>
+<span>Tarjeta Crédito</span>
+</button>
+</div>
+</div>
+<!-- Category Selector Grid -->
+<div class="flex flex-col gap-2">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-outline">Categoría</span>
+<div class="grid grid-cols-3 gap-2">
+<!-- Active Category -->
+<button class="category-btn flex flex-col items-center justify-center p-3 rounded-DEFAULT bg-surface-container-high text-primary shadow-sm active:scale-95 transition-all" type="button">
+<span class="material-symbols-outlined text-[24px] mb-1" style="font-variation-settings: 'FILL' 1;">restaurant</span>
+<span class="font-label-sm text-label-sm font-semibold truncate w-full text-center">Comida &amp; Café</span>
+</button>
+<button class="category-btn flex flex-col items-center justify-center p-3 rounded-DEFAULT bg-surface-container text-on-surface-variant hover:text-primary active:scale-95 transition-all" type="button">
+<span class="material-symbols-outlined text-[24px] mb-1">directions_subway</span>
+<span class="font-label-sm text-label-sm font-medium truncate w-full text-center">Transporte</span>
+</button>
+<button class="category-btn flex flex-col items-center justify-center p-3 rounded-DEFAULT bg-surface-container text-on-surface-variant hover:text-primary active:scale-95 transition-all" type="button">
+<span class="material-symbols-outlined text-[24px] mb-1">shopping_cart</span>
+<span class="font-label-sm text-label-sm font-medium truncate w-full text-center">Súper</span>
+</button>
+<button class="category-btn flex flex-col items-center justify-center p-3 rounded-DEFAULT bg-surface-container text-on-surface-variant hover:text-primary active:scale-95 transition-all" type="button">
+<span class="material-symbols-outlined text-[24px] mb-1">receipt_long</span>
+<span class="font-label-sm text-label-sm font-medium truncate w-full text-center">Servicios</span>
+</button>
+<button class="category-btn flex flex-col items-center justify-center p-3 rounded-DEFAULT bg-surface-container text-on-surface-variant hover:text-primary active:scale-95 transition-all" type="button">
+<span class="material-symbols-outlined text-[24px] mb-1">medical_services</span>
+<span class="font-label-sm text-label-sm font-medium truncate w-full text-center">Salud</span>
+</button>
+<button class="category-btn flex flex-col items-center justify-center p-3 rounded-DEFAULT bg-surface-container text-on-surface-variant hover:text-primary active:scale-95 transition-all" type="button">
+<span class="material-symbols-outlined text-[24px] mb-1">theater_comedy</span>
+<span class="font-label-sm text-label-sm font-medium truncate w-full text-center">Ocio</span>
+</button>
+</div>
+</div>
+<!-- iOS Toggle: Diferir al siguiente corte -->
+<div class="flex items-center justify-between p-3.5 bg-surface-container/70 rounded-DEFAULT">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-full bg-surface-container-high flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[20px]">calendar_month</span>
+</div>
+<div class="flex flex-col">
+<span class="font-title-md text-title-md text-primary">Diferir al siguiente corte</span>
+<span class="font-label-sm text-label-sm text-outline">Ideal para gastos post-fecha de corte</span>
+</div>
+</div>
+<!-- Custom iOS Switch Component -->
+<button aria-checked="false" class="w-[51px] h-[31px] rounded-full bg-surface-variant p-0.5 transition-colors duration-200 relative flex items-center" id="toggle-defer" role="switch" type="button">
+<span class="w-[27px] h-[27px] rounded-full bg-primary shadow-md transform transition-transform duration-200 translate-x-0" id="toggle-thumb"></span>
+</button>
+</div>
+<!-- MSI (Meses sin Intereses) Expandable Section -->
+<div class="flex flex-col gap-3 p-4 bg-surface-container/70 rounded-DEFAULT">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2 text-primary">
+<span class="material-symbols-outlined text-[20px]">view_timeline</span>
+<span class="font-title-md text-title-md">Plan a Meses (MSI)</span>
+</div>
+<span class="font-label-sm text-label-sm text-outline">0% Interés</span>
+</div>
+<div class="grid grid-cols-6 gap-1.5">
+<button class="msi-pill py-2 rounded-full font-label-md text-label-md font-medium text-center bg-surface-container-high text-on-surface-variant active:scale-95 transition-all" type="button">3</button>
+<button class="msi-pill py-2 rounded-full font-label-md text-label-md font-semibold text-center bg-primary text-on-primary shadow-sm active:scale-95 transition-all" type="button">6</button>
+<button class="msi-pill py-2 rounded-full font-label-md text-label-md font-medium text-center bg-surface-container-high text-on-surface-variant active:scale-95 transition-all" type="button">9</button>
+<button class="msi-pill py-2 rounded-full font-label-md text-label-md font-medium text-center bg-surface-container-high text-on-surface-variant active:scale-95 transition-all" type="button">12</button>
+<button class="msi-pill py-2 rounded-full font-label-md text-label-md font-medium text-center bg-surface-container-high text-on-surface-variant active:scale-95 transition-all" type="button">18</button>
+<button class="msi-pill py-2 rounded-full font-label-md text-label-md font-medium text-center bg-surface-container-high text-on-surface-variant active:scale-95 transition-all" type="button">24</button>
+</div>
+<div class="flex items-center justify-between pt-1">
+<span class="font-label-md text-label-md text-on-surface-variant">Parcialidad inicial:</span>
+<div class="px-3 py-1.5 bg-surface-container-high rounded-full flex items-center gap-2">
+<span class="font-label-md text-label-md text-primary font-medium">1 de 6 meses</span>
+<span class="material-symbols-outlined text-[16px] text-outline">edit</span>
+</div>
+</div>
+</div>
+<!-- Notes and Concept Field -->
+<div class="flex items-center gap-3 px-3.5 py-3 bg-surface-container/70 rounded-DEFAULT">
+<span class="material-symbols-outlined text-[20px] text-outline">edit_note</span>
+<input class="bg-transparent font-body-md text-body-md text-primary placeholder:text-outline focus:outline-none w-full" placeholder="Concepto o comercio (opcional)..." type="text"/>
+</div>
+<!-- Integrated iOS Monochromatic Keypad -->
+<div class="flex flex-col gap-2 pt-2 bg-surface-container-lowest/90 p-3 rounded-lg shadow-inner">
+<div class="grid grid-cols-3 gap-2">
+<button class="num-key h-12 rounded-full bg-surface-container-high/60 active:bg-primary active:text-on-primary text-primary font-headline-sm text-headline-sm font-semibold flex items-center justify-center transition-colors" data-val="1" type="button">1</button>
+<button class="num-key h-12 rounded-full bg-surface-container-high/60 active:bg-primary active:text-on-primary text-primary font-headline-sm text-headline-sm font-semibold flex items-center justify-center transition-colors" data-val="2" type="button">2</button>
+<button class="num-key h-12 rounded-full bg-surface-container-high/60 active:bg-primary active:text-on-primary text-primary font-headline-sm text-headline-sm font-semibold flex items-center justify-center transition-colors" data-val="3" type="button">3</button>
+<button class="num-key h-12 rounded-full bg-surface-container-high/60 active:bg-primary active:text-on-primary text-primary font-headline-sm text-headline-sm font-semibold flex items-center justify-center transition-colors" data-val="4" type="button">4</button>
+<button class="num-key h-12 rounded-full bg-surface-container-high/60 active:bg-primary active:text-on-primary text-primary font-headline-sm text-headline-sm font-semibold flex items-center justify-center transition-colors" data-val="5" type="button">5</button>
+<button class="num-key h-12 rounded-full bg-surface-container-high/60 active:bg-primary active:text-on-primary text-primary font-headline-sm text-headline-sm font-semibold flex items-center justify-center transition-colors" data-val="6" type="button">6</button>
+<button class="num-key h-12 rounded-full bg-surface-container-high/60 active:bg-primary active:text-on-primary text-primary font-headline-sm text-headline-sm font-semibold flex items-center justify-center transition-colors" data-val="7" type="button">7</button>
+<button class="num-key h-12 rounded-full bg-surface-container-high/60 active:bg-primary active:text-on-primary text-primary font-headline-sm text-headline-sm font-semibold flex items-center justify-center transition-colors" data-val="8" type="button">8</button>
+<button class="num-key h-12 rounded-full bg-surface-container-high/60 active:bg-primary active:text-on-primary text-primary font-headline-sm text-headline-sm font-semibold flex items-center justify-center transition-colors" data-val="9" type="button">9</button>
+<button class="num-key h-12 rounded-full bg-surface-container-high/40 active:bg-primary active:text-on-primary text-primary font-headline-sm text-headline-sm font-semibold flex items-center justify-center transition-colors" data-val="." type="button">.</button>
+<button class="num-key h-12 rounded-full bg-surface-container-high/60 active:bg-primary active:text-on-primary text-primary font-headline-sm text-headline-sm font-semibold flex items-center justify-center transition-colors" data-val="0" type="button">0</button>
+<button class="h-12 rounded-full bg-surface-container-high/40 active:bg-primary active:text-on-primary text-primary flex items-center justify-center transition-colors" id="key-delete" type="button">
+<span class="material-symbols-outlined text-[22px]">backspace</span>
+</button>
+</div>
+</div>
+<!-- Action Button Solid White Capsule -->
+<div class="w-full pt-2">
+<button class="w-full h-[52px] rounded-full bg-primary text-on-primary font-title-md text-title-md font-semibold flex items-center justify-center gap-2 shadow-lg active:scale-[0.98] transition-all" type="button">
+<span class="material-symbols-outlined text-[22px]">check_circle</span>
+<span>Guardar Movimiento</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Interactive Logic for Input, Toggles, and Tabs -->
+<script>
+    (function initQuickRegister() {
+      let rawAmount = '';
+      const displayElem = document.getElementById('display-amount');
+      const keys = document.querySelectorAll('.num-key');
+      const deleteKey = document.getElementById('key-delete');
+
+      function updateDisplay() {
+        if (!rawAmount || rawAmount === '0') {
+          displayElem.textContent = '0.00';
+          return;
+        }
+        if (rawAmount.includes('.')) {
+          const parts = rawAmount.split('.');
+          const ints = parseInt(parts[0] || '0', 10).toLocaleString('en-US');
+          displayElem.textContent = ints + '.' + parts[1];
+        } else {
+          displayElem.textContent = parseInt(rawAmount, 10).toLocaleString('en-US') + '.00';
+        }
+      }
+
+      keys.forEach(k => {
+        k.addEventListener('click', () => {
+          const val = k.dataset.val;
+          if (val === '.') {
+            if (!rawAmount.includes('.')) {
+              rawAmount = (rawAmount || '0') + '.';
+            }
+          } else {
+            if (rawAmount.includes('.')) {
+              const decimals = rawAmount.split('.')[1];
+              if (decimals && decimals.length >= 2) return;
+            }
+            if (rawAmount === '0' && val !== '.') {
+              rawAmount = val;
+            } else {
+              rawAmount += val;
+            }
+          }
+          updateDisplay();
+        });
+      });
+
+      if (deleteKey) {
+        deleteKey.addEventListener('click', () => {
+          rawAmount = rawAmount.slice(0, -1);
+          updateDisplay();
+        });
+      }
+
+      // iOS Toggle logic
+      const toggle = document.getElementById('toggle-defer');
+      const thumb = document.getElementById('toggle-thumb');
+      let isToggled = false;
+      if (toggle && thumb) {
+        toggle.addEventListener('click', () => {
+          isToggled = !isToggled;
+          toggle.setAttribute('aria-checked', isToggled);
+          if (isToggled) {
+            toggle.classList.remove('bg-surface-variant');
+            toggle.classList.add('bg-primary');
+            thumb.classList.remove('bg-primary');
+            thumb.classList.add('bg-on-primary', 'translate-x-5');
+          } else {
+            toggle.classList.add('bg-surface-variant');
+            toggle.classList.remove('bg-primary');
+            thumb.classList.add('bg-primary');
+            thumb.classList.remove('bg-on-primary', 'translate-x-5');
+          }
+        });
+      }
+
+      // Segmented Tabs Active State Switch
+      const segButtons = document.querySelectorAll('.seg-btn');
+      segButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          segButtons.forEach(b => {
+            b.classList.remove('bg-primary', 'text-on-primary', 'shadow-sm', 'font-semibold');
+            b.classList.add('text-on-surface-variant', 'font-medium');
+          });
+          btn.classList.add('bg-primary', 'text-on-primary', 'shadow-sm', 'font-semibold');
+          btn.classList.remove('text-on-surface-variant', 'font-medium');
+        });
+      });
+
+      // Category buttons active state
+      const catButtons = document.querySelectorAll('.category-btn');
+      catButtons.forEach(cat => {
+        cat.addEventListener('click', () => {
+          catButtons.forEach(c => {
+            c.classList.remove('bg-surface-container-high', 'text-primary');
+            c.classList.add('bg-surface-container', 'text-on-surface-variant');
+            const icon = c.querySelector('.material-symbols-outlined');
+            if (icon) icon.style.fontVariationSettings = "'FILL' 0";
+          });
+          cat.classList.add('bg-surface-container-high', 'text-primary');
+          cat.classList.remove('bg-surface-container', 'text-on-surface-variant');
+          const icon = cat.querySelector('.material-symbols-outlined');
+          if (icon) icon.style.fontVariationSettings = "'FILL' 1";
+        });
+      });
+
+      // MSI selection active state
+      const msiPills = document.querySelectorAll('.msi-pill');
+      msiPills.forEach(pill => {
+        pill.addEventListener('click', () => {
+          msiPills.forEach(p => {
+            p.classList.remove('bg-primary', 'text-on-primary', 'shadow-sm', 'font-semibold');
+            p.classList.add('bg-surface-container-high', 'text-on-surface-variant', 'font-medium');
+          });
+          pill.classList.add('bg-primary', 'text-on-primary', 'shadow-sm', 'font-semibold');
+          pill.classList.remove('bg-surface-container-high', 'text-on-surface-variant', 'font-medium');
+        });
+      });
+
+      // Account selection active state
+      const accPills = document.querySelectorAll('.account-pill');
+      accPills.forEach(pill => {
+        pill.addEventListener('click', () => {
+          accPills.forEach(p => {
+            p.classList.remove('bg-primary', 'text-on-primary', 'font-semibold');
+            p.classList.add('bg-surface-container', 'text-on-surface-variant', 'font-medium');
+          });
+          pill.classList.add('bg-primary', 'text-on-primary', 'font-semibold');
+          pill.classList.remove('bg-surface-container', 'text-on-surface-variant', 'font-medium');
+        });
+      });
+    })();
+  </script>
+</div></main><div class="fixed bottom-0 inset-x-0 z-50 pointer-events-none pb-safe flex flex-col items-center"><div class="w-32 h-1 bg-primary/40 rounded-full mb-1.5"></div></div></body></html>

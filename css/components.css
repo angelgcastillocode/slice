@@ -1,0 +1,546 @@
+/* ============================================================================
+   Slice Component Library - Liquid Glass Cards, Specular Borders, Switches & Modals
+   ============================================================================ */
+
+/* Level 1 & Level 2 Liquid Glass Cards with Top Specular Edge */
+.glass-card {
+  position: relative;
+  border-radius: var(--radius-lg);
+  padding: 18px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.07) 0%, rgba(255, 255, 255, 0.03) 100%);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  box-shadow:
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.22),
+    0 8px 28px -4px rgba(0, 0, 0, 0.8);
+}
+
+.glass-card-hero {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-xl);
+  padding: 22px;
+  background: linear-gradient(165deg, rgba(255, 255, 255, 0.11) 0%, rgba(255, 255, 255, 0.035) 100%);
+  backdrop-filter: blur(32px) saturate(190%);
+  -webkit-backdrop-filter: blur(32px) saturate(190%);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow:
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.32),
+    0 16px 40px -4px rgba(0, 0, 0, 0.85);
+}
+
+.glass-card-hero::before {
+  content: '';
+  position: absolute;
+  top: -50px;
+  right: -40px;
+  width: 170px;
+  height: 170px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.11) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.glass-well {
+  border-radius: var(--radius-md);
+  padding: 12px 14px;
+  background: rgba(10, 10, 13, 0.68);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+/* Typography Helpers */
+.label-eyebrow {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-secondary);
+}
+
+.hero-amount {
+  font-size: 38px;
+  font-weight: 600;
+  line-height: 44px;
+  letter-spacing: -0.03em;
+  color: var(--primary);
+}
+
+.stat-amount {
+  font-size: 26px;
+  font-weight: 600;
+  line-height: 32px;
+  letter-spacing: -0.02em;
+  color: var(--primary);
+}
+
+.card-title {
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 22px;
+  letter-spacing: -0.01em;
+  color: var(--primary);
+}
+
+.text-subtle {
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+/* Capsule Buttons */
+.btn-primary-capsule {
+  height: 48px;
+  padding: 0 20px;
+  border-radius: var(--radius-full);
+  background: #ffffff;
+  color: #000000;
+  font-size: 15px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow:
+    0 4px 16px rgba(255, 255, 255, 0.16),
+    inset 0 1px 0 #ffffff;
+  transition: transform 0.15s ease, opacity 0.15s ease;
+}
+
+.btn-primary-capsule:active {
+  transform: scale(0.97);
+  opacity: 0.92;
+}
+
+.btn-glass-capsule {
+  height: 40px;
+  padding: 0 14px;
+  border-radius: var(--radius-full);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.20);
+  color: var(--primary);
+  font-size: 13px;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+
+.btn-glass-capsule:hover {
+  background: rgba(255, 255, 255, 0.13);
+}
+
+.btn-glass-capsule:active {
+  transform: scale(0.96);
+}
+
+/* Badges & Status Pills */
+.badge-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  background: rgba(255, 255, 255, 0.09);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: var(--secondary);
+}
+
+.badge-pill-solid {
+  background: #ffffff;
+  color: #000000;
+  border-color: #ffffff;
+}
+
+.pulse-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #ffffff;
+  box-shadow: 0 0 8px #ffffff;
+}
+
+/* Monochromatic Progress Bar */
+.progress-track {
+  width: 100%;
+  height: 6px;
+  border-radius: var(--radius-full);
+  background: rgba(255, 255, 255, 0.10);
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  border-radius: var(--radius-full);
+  background: #ffffff;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+  transition: width 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* Segmented Control (iOS Monochrome Pill) */
+.segmented-control {
+  display: flex;
+  align-items: center;
+  padding: 3px;
+  border-radius: var(--radius-full);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  gap: 2px;
+  overflow-x: auto;
+}
+
+.segmented-btn {
+  flex: 1;
+  min-width: 64px;
+  padding: 7px 12px;
+  border-radius: var(--radius-full);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  text-align: center;
+  white-space: nowrap;
+  transition: all 0.18s ease;
+}
+
+.segmented-btn.active {
+  background: #ffffff;
+  color: #000000;
+  font-weight: 600;
+  box-shadow: 0 2px 10px rgba(255, 255, 255, 0.2);
+}
+
+/* Native iOS Liquid Toggle Switch */
+.ios-switch {
+  width: 51px;
+  height: 31px;
+  border-radius: var(--radius-full);
+  background: rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 2px;
+  display: inline-flex;
+  align-items: center;
+  position: relative;
+  transition: background 0.22s ease, border-color 0.22s ease;
+  flex-shrink: 0;
+}
+
+.ios-switch[aria-checked="true"] {
+  background: #ffffff;
+  border-color: #ffffff;
+}
+
+.ios-switch-knob {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: #ffffff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.45);
+  transform: translateX(0);
+  transition: transform 0.22s cubic-bezier(0.175, 0.885, 0.32, 1.275), background 0.22s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ios-switch[aria-checked="true"] .ios-switch-knob {
+  background: #000000;
+  color: #ffffff;
+  transform: translateX(20px);
+}
+
+/* Icon Squircle Container */
+.icon-squircle {
+  width: 40px;
+  height: 40px;
+  border-radius: 13px;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary);
+  flex-shrink: 0;
+}
+
+/* Calendar Day Cell */
+.cal-day-btn {
+  height: 42px;
+  width: 42px;
+  margin: 0 auto;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-primary);
+  transition: all 0.15s ease;
+}
+
+.cal-day-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.cal-day-btn.is-today {
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  font-weight: 700;
+}
+
+.cal-day-btn.is-selected {
+  background: #ffffff;
+  color: #000000;
+  font-weight: 700;
+  box-shadow: 0 4px 14px rgba(255, 255, 255, 0.28);
+}
+
+.cal-dots {
+  display: flex;
+  gap: 3px;
+  position: absolute;
+  bottom: 4px;
+}
+
+.cal-dot-cutoff {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #ffffff;
+}
+
+.cal-day-btn.is-selected .cal-dot-cutoff {
+  background: #000000;
+}
+
+.cal-dot-due {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: transparent;
+  box-shadow: inset 0 0 0 1.5px #ffffff;
+}
+
+.cal-day-btn.is-selected .cal-dot-due {
+  box-shadow: inset 0 0 0 1.5px #000000;
+}
+
+.cal-dot-recurring {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #8e9192;
+}
+
+/* Liquid Bottom Sheet Modals (Level 3) */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  background: rgba(0, 0, 0, 0.76);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+
+.modal-overlay.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.bottom-sheet {
+  width: 100%;
+  max-width: 440px;
+  max-height: 92dvh;
+  overflow-y: auto;
+  border-radius: var(--radius-sheet) var(--radius-sheet) 0 0;
+  background: var(--glass-fill-sheet);
+  backdrop-filter: blur(40px) saturate(190%);
+  -webkit-backdrop-filter: blur(40px) saturate(190%);
+  border-top: 1px solid rgba(255, 255, 255, 0.28);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.35),
+    0 -12px 40px rgba(0, 0, 0, 0.92);
+  padding: 12px var(--screen-margin) calc(var(--safe-bottom) + 20px);
+  transform: translateY(100%);
+  transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.modal-overlay.open .bottom-sheet {
+  transform: translateY(0);
+}
+
+.sheet-handle {
+  width: 38px;
+  height: 5px;
+  border-radius: var(--radius-full);
+  background: rgba(255, 255, 255, 0.28);
+  margin: 2px auto 6px;
+}
+
+/* Form Input Wells */
+.input-well {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 50px;
+  padding: 0 14px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  transition: border-color 0.18s ease, box-shadow 0.18s ease;
+}
+
+.input-well:focus-within {
+  border-color: var(--border-focus);
+  box-shadow: inset 0 0 12px rgba(255, 255, 255, 0.05);
+}
+
+.input-well input,
+.input-well select {
+  width: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--primary);
+  font-size: 16px;
+}
+
+.input-well select option {
+  background: #18181b;
+  color: #ffffff;
+}
+
+/* Monochromatic Touch Keypad */
+.keypad-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  padding: 10px;
+  border-radius: var(--radius-lg);
+  background: rgba(8, 8, 10, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.keypad-btn {
+  height: 46px;
+  border-radius: var(--radius-full);
+  background: rgba(255, 255, 255, 0.07);
+  color: var(--primary);
+  font-size: 20px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.12s ease, color 0.12s ease, transform 0.1s ease;
+}
+
+.keypad-btn:active {
+  background: #ffffff;
+  color: #000000;
+  transform: scale(0.96);
+}
+
+/* Selectable Account / Category / MSI Pills */
+.pill-row {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+}
+
+.choice-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 14px;
+  border-radius: var(--radius-full);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  color: var(--text-secondary);
+  font-size: 13px;
+  font-weight: 500;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: all 0.15s ease;
+}
+
+.choice-pill.active {
+  background: #ffffff;
+  color: #000000;
+  border-color: #ffffff;
+  font-weight: 600;
+  box-shadow: 0 2px 12px rgba(255, 255, 255, 0.22);
+}
+
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+
+.category-tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 10px 6px;
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: var(--text-secondary);
+  font-size: 11px;
+  font-weight: 500;
+  text-align: center;
+  transition: all 0.15s ease;
+}
+
+.category-tile.active {
+  background: rgba(255, 255, 255, 0.18);
+  border-color: #ffffff;
+  color: #ffffff;
+  font-weight: 600;
+}
+
+/* Toast Notification */
+.toast-banner {
+  position: fixed;
+  bottom: calc(var(--safe-bottom) + 86px);
+  left: 50%;
+  transform: translateX(-50%) translateY(16px);
+  z-index: 80;
+  padding: 10px 18px;
+  border-radius: var(--radius-full);
+  background: #ffffff;
+  color: #000000;
+  font-size: 13px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.85);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.22s ease, transform 0.22s ease;
+  white-space: nowrap;
+}
+
+.toast-banner.visible {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}

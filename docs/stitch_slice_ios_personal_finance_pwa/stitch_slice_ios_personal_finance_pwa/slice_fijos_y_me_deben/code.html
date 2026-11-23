@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="es"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_tab" name="shell-type"/><title>Slice - Finanzas</title><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base { html, body { width: 100%; min-height: 100%; margin: 0; padding: 0; background-color: #131313; } body { overscroll-behavior: none; } .pb-safe { padding-bottom: env(safe-area-inset-bottom, 34px); } .pt-safe { padding-top: env(safe-area-inset-top, 44px); } main > :first-child { margin-top: 0 !important; } main > :last-child { margin-bottom: 0 !important; } } ::-webkit-scrollbar { display: none; }</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { colors: { "tertiary-fixed-dim": "#c8c5ca", "outline": "#8e9192", "on-tertiary": "#303033", "on-primary-fixed": "#1a1c1c", "surface-variant": "#353535", "surface-container": "#1f1f1f", "inverse-surface": "#e2e2e2", "error": "#ffb4ab", "error-container": "#93000a", "on-error-container": "#ffdad6", "on-secondary-fixed": "#1a1c1e", "primary-fixed-dim": "#c6c6c7", "surface-container-lowest": "#0e0e0e", "on-surface-variant": "#c4c7c8", "on-primary-container": "#636565", "on-primary-fixed-variant": "#454747", "surface-bright": "#393939", "surface-container-highest": "#353535", "inverse-on-surface": "#303030", "on-tertiary-container": "#656467", "secondary": "#c6c6c9", "inverse-primary": "#5d5f5f", "surface-tint": "#c6c6c7", "on-primary": "#2f3131", "secondary-fixed-dim": "#c6c6c9", "primary-container": "#e2e2e2", "tertiary-container": "#e4e1e6", "outline-variant": "#444748", "background": "#131313", "surface-container-low": "#1b1b1b", "primary": "#ffffff", "on-error": "#690005", "surface": "#131313", "on-secondary-fixed-variant": "#454749", "on-tertiary-fixed": "#1b1b1e", "on-secondary": "#2f3033", "secondary-container": "#4a4b4e", "secondary-fixed": "#e2e2e5", "on-surface": "#e2e2e2", "primary-fixed": "#e2e2e2", "on-tertiary-fixed-variant": "#47464a", "tertiary": "#ffffff", "surface-dim": "#131313", "tertiary-fixed": "#e4e1e6", "on-secondary-container": "#bbbbbe", "surface-container-high": "#2a2a2a", "on-background": "#e2e2e2" }, borderRadius: { "DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px" }, spacing: { "gutter": "1rem", "margin-safe-bottom": "2.125rem", "margin": "1.25rem", "space-sm": "0.5rem", "margin-safe-top": "2.75rem", "space-xs": "0.25rem", "space-md": "1rem", "gutter-compact": "0.75rem", "space-lg": "1.5rem", "space-xl": "2rem" }, fontFamily: { "body-md": ["Inter"], "headline-md": ["Inter"], "display-hero-mobile": ["Inter"], "label-sm": ["Inter"], "display-hero": ["Inter"], "headline-sm": ["Inter"], "title-md": ["Inter"], "headline-lg": ["Inter"], "body-lg": ["Inter"], "currency-stat": ["Inter"], "label-md": ["Inter"] }, fontSize: { "body-md": ["15px", { "lineHeight": "20px", "letterSpacing": "0em", "fontWeight": "400" }], "headline-md": ["24px", { "lineHeight": "30px", "letterSpacing": "-0.02em", "fontWeight": "600" }], "display-hero-mobile": ["38px", { "lineHeight": "44px", "letterSpacing": "-0.03em", "fontWeight": "600" }], "label-sm": ["11px", { "lineHeight": "14px", "letterSpacing": "0.04em", "fontWeight": "600" }], "display-hero": ["44px", { "lineHeight": "52px", "letterSpacing": "-0.03em", "fontWeight": "600" }], "headline-sm": ["20px", { "lineHeight": "26px", "letterSpacing": "-0.015em", "fontWeight": "500" }], "title-md": ["17px", { "lineHeight": "22px", "letterSpacing": "-0.01em", "fontWeight": "600" }], "headline-lg": ["32px", { "lineHeight": "38px", "letterSpacing": "-0.025em", "fontWeight": "600" }], "body-lg": ["17px", { "lineHeight": "24px", "letterSpacing": "-0.005em", "fontWeight": "400" }], "currency-stat": ["28px", { "lineHeight": "34px", "letterSpacing": "-0.02em", "fontWeight": "600" }], "label-md": ["13px", { "lineHeight": "18px", "letterSpacing": "0.01em", "fontWeight": "500" }] } } } };</script><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head><body class="bg-surface font-body-md text-on-surface flex flex-col min-h-screen selection:bg-white/20 selection:text-white antialiased"><header class="fixed top-0 inset-x-0 z-50 pt-safe bg-surface/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="w-full px-margin h-11 flex items-center justify-between text-primary font-headline-sm text-label-md select-none"><span class="font-semibold tracking-tight">9:41</span><div class="flex items-center gap-1.5"><span class="material-symbols-outlined text-[17px] leading-none">signal_cellular_4_bar</span><span class="material-symbols-outlined text-[17px] leading-none">wifi</span><span class="material-symbols-outlined text-[20px] leading-none">battery_full</span></div></div><div class="h-16 px-margin flex items-center justify-between"><div class="flex items-center gap-space-sm"><img alt="Slice Brand Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/ALJJyrCXNUoRrYShPH44TPB0m7F_X2o2OSLtnlK4YKTXFeWYO3YQnkyQwT1p3lK94zRWMDlYd0yUfJpsE53Qzgsdq2HGxYYvFhsgFY_lsdt9fcDuO7n-IRKWnh-HjceQ2sfpfEJBeiMITBwyUppJO5HiYLxY4wbrhyLb9t-pNdCGXzQGbj0nhBj1yJVwv-zHZPEEiGKF7No9a1cMid6NI1okl5jRrElkrxVuz2sG9FNSn2Ge"/><h1 class="font-title-md text-title-md text-primary tracking-tight">Fijos</h1></div><div class="flex items-center"><img alt="Profile" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBhH4yJIAUDYYskxiKXWYAZX06svJfcKaFbw7mi_eLOJgpKeaMeKNYHXTPIrySTvDn3kDAJIFWxZLZ7exxEy3p6LiBdo2UEKVr5SuNg4dxNv6ghct0sTppOvAZgmUj2KNRgkI51PYJK3rvde3siQZQCRqzLoOwnMKOlyNSsJM9-Y1Pg7f7Lm16Sv7nzfpkcW8kI1IbvOxf_ls9bXuGj83YhTpzPk9g0bhOZQEBeJ3M"/></div></div></header><main class="flex-1 flex flex-col relative w-full px-margin pt-27 pb-36 bg-surface"><div class="flex flex-col w-full pb-6 space-y-6">
+<!-- Dynamic Top Ambient Spotlight Glow -->
+<div class="relative w-full overflow-hidden">
+<div class="absolute -top-12 left-1/2 -translate-x-1/2 w-72 h-36 bg-gradient-to-b from-primary/15 via-primary/5 to-transparent blur-3xl pointer-events-none rounded-full"></div>
+</div>
+<!-- Header Title & Context Filter -->
+<div class="flex flex-col space-y-3">
+<div class="flex items-center justify-between">
+<div>
+<span class="font-label-sm text-label-sm text-outline tracking-wider uppercase">Noviembre 2024</span>
+<h2 class="font-headline-md text-headline-md text-primary tracking-tight">Compromisos &amp; Préstamos</h2>
+</div>
+<div class="p-1 rounded-full bg-surface-container flex items-center shadow-inner">
+<span class="material-symbols-outlined text-outline text-[20px] px-1.5" style="font-variation-settings: 'FILL' 1;">sync</span>
+</div>
+</div>
+<!-- Segmented Glass Filter Tabs -->
+<div class="flex items-center p-1 rounded-full bg-surface-container-low backdrop-blur-xl">
+<button class="filter-btn flex-1 py-1.5 px-3 rounded-full text-center font-label-md text-label-md text-primary bg-surface-bright shadow-sm transition-all duration-200" onclick="setFilter('todos', this)" type="button">
+        Todos
+      </button>
+<button class="filter-btn flex-1 py-1.5 px-3 rounded-full text-center font-label-md text-label-md text-outline hover:text-on-surface transition-all duration-200" onclick="setFilter('suscripciones', this)" type="button">
+        Suscripciones
+      </button>
+<button class="filter-btn flex-1 py-1.5 px-3 rounded-full text-center font-label-md text-label-md text-outline hover:text-on-surface transition-all duration-200" onclick="setFilter('prestamos', this)" type="button">
+        Préstamos
+      </button>
+</div>
+</div>
+<!-- Key Metrics Bento Grid -->
+<div class="grid grid-cols-1 gap-3">
+<!-- Card 1: Total Fijos del Mes -->
+<div class="relative p-5 rounded-lg bg-surface-container/70 backdrop-blur-2xl shadow-xl flex flex-col justify-between overflow-hidden">
+<div class="flex items-start justify-between mb-3">
+<div class="flex flex-col">
+<div class="flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
+<span class="font-label-sm text-label-sm text-outline uppercase tracking-wider">Total Fijos del Mes</span>
+</div>
+<span class="font-currency-stat text-currency-stat text-primary tracking-tight mt-1 tabular-nums">$3,850.00 <span class="text-label-md text-outline font-normal">MXN</span></span>
+</div>
+<div class="w-10 h-10 rounded-full bg-surface-variant/60 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[20px]">calendar_month</span>
+</div>
+</div>
+<!-- Linear Ratio Progress -->
+<div class="space-y-2">
+<div class="w-full h-1.5 rounded-full bg-surface-container-highest overflow-hidden flex">
+<div class="h-full bg-primary rounded-full" style="width: 75%;"></div>
+</div>
+<div class="flex items-center justify-between font-label-sm text-label-sm">
+<span class="text-on-surface flex items-center gap-1">
+<span class="inline-block w-2 h-2 rounded-full bg-primary"></span>
+            $2,900.00 pagados
+          </span>
+<span class="text-outline flex items-center gap-1">
+<span class="inline-block w-2 h-2 rounded-full bg-surface-variant"></span>
+            $950.00 pendientes
+          </span>
+</div>
+</div>
+</div>
+<!-- Card 2: Por Cobrar (Me deben) -->
+<div class="p-4 rounded-lg bg-surface-container/40 backdrop-blur-xl flex items-center justify-between shadow-lg">
+<div class="flex items-center gap-3">
+<div class="w-11 h-11 rounded-full bg-surface-container-high flex items-center justify-center text-primary shadow-inner">
+<span class="material-symbols-outlined text-[22px]">account_balance_wallet</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-outline uppercase tracking-wider">Total Por Cobrar</span>
+<span class="font-headline-sm text-headline-sm text-primary tracking-tight tabular-nums">$650.00 <span class="text-label-sm text-outline font-normal">MXN</span></span>
+</div>
+</div>
+<div class="px-2.5 py-1 rounded-full bg-surface-variant/50 text-on-surface font-label-sm text-label-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">group</span>
+<span>2 activos</span>
+</div>
+</div>
+</div>
+<!-- Section 1: Gastos Fijos y Suscripciones -->
+<section class="flex flex-col space-y-3 transition-opacity duration-300" id="section-fijos">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-outline text-[18px]">event_repeat</span>
+<h3 class="font-title-md text-title-md text-primary">Gastos Fijos y Suscripciones</h3>
+</div>
+<span class="font-label-sm text-label-sm text-outline">4 servicios</span>
+</div>
+<div class="space-y-2.5">
+<!-- Item 1: Renta (Pagado) -->
+<div class="p-4 rounded-lg bg-surface-container/60 backdrop-blur-xl flex items-center justify-between shadow-sm transition-all duration-300">
+<div class="flex items-center gap-3 min-w-0">
+<div class="w-10 h-10 rounded-full bg-surface-variant/80 flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined text-[20px]">apartment</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-title-md text-title-md text-primary truncate">Renta Departamental</span>
+<div class="flex items-center gap-2 text-outline font-label-md text-label-md">
+<span>Vence 05 Nov</span>
+<span class="w-1 h-1 rounded-full bg-outline"></span>
+<span class="tabular-nums font-medium text-primary">$2,500.00 MXN</span>
+</div>
+</div>
+</div>
+<div class="shrink-0 pl-2">
+<div class="px-3 py-1 rounded-full bg-surface-bright text-primary font-label-sm text-label-sm flex items-center gap-1 shadow-sm">
+<span>Pagado</span>
+<span class="material-symbols-outlined text-[14px]">check</span>
+</div>
+</div>
+</div>
+<!-- Item 2: Smart Fit (Pendiente) -->
+<div class="p-4 rounded-lg bg-surface-container/60 backdrop-blur-xl flex items-center justify-between shadow-sm transition-all duration-300">
+<div class="flex items-center gap-3 min-w-0">
+<div class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined text-[20px]">fitness_center</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-title-md text-title-md text-primary truncate">Gimnasio Smart Fit</span>
+<div class="flex items-center gap-2 text-outline font-label-md text-label-md">
+<span>Vence 20 Nov</span>
+<span class="w-1 h-1 rounded-full bg-outline"></span>
+<span class="tabular-nums font-medium text-primary">$450.00 MXN</span>
+</div>
+</div>
+</div>
+<div class="shrink-0 pl-2">
+<button aria-checked="false" class="w-12 h-7 rounded-full bg-surface-variant flex items-center p-0.5 transition-colors duration-200" onclick="togglePayment(this)" role="switch" type="button">
+<span class="w-6 h-6 rounded-full bg-primary shadow-md transform transition-transform duration-200 flex items-center justify-center">
+<span class="material-symbols-outlined text-[14px] text-surface hidden">check</span>
+</span>
+</button>
+</div>
+</div>
+<!-- Item 3: Google One + YouTube (Pendiente) -->
+<div class="p-4 rounded-lg bg-surface-container/60 backdrop-blur-xl flex items-center justify-between shadow-sm transition-all duration-300">
+<div class="flex items-center gap-3 min-w-0">
+<div class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined text-[20px]">play_circle</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-title-md text-title-md text-primary truncate">Google + YouTube</span>
+<div class="flex items-center gap-2 text-outline font-label-md text-label-md">
+<span>Vence 24 Nov</span>
+<span class="w-1 h-1 rounded-full bg-outline"></span>
+<span class="tabular-nums font-medium text-primary">$249.00 MXN</span>
+</div>
+</div>
+</div>
+<div class="shrink-0 pl-2">
+<button aria-checked="false" class="w-12 h-7 rounded-full bg-surface-variant flex items-center p-0.5 transition-colors duration-200" onclick="togglePayment(this)" role="switch" type="button">
+<span class="w-6 h-6 rounded-full bg-primary shadow-md transform transition-transform duration-200 flex items-center justify-center">
+<span class="material-symbols-outlined text-[14px] text-surface hidden">check</span>
+</span>
+</button>
+</div>
+</div>
+<!-- Item 4: Internet Fibra Óptica (Pendiente) -->
+<div class="p-4 rounded-lg bg-surface-container/60 backdrop-blur-xl flex items-center justify-between shadow-sm transition-all duration-300">
+<div class="flex items-center gap-3 min-w-0">
+<div class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined text-[20px]">wifi_tethering</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-title-md text-title-md text-primary truncate">Internet Fibra Óptica</span>
+<div class="flex items-center gap-2 text-outline font-label-md text-label-md">
+<span>Vence 28 Nov</span>
+<span class="w-1 h-1 rounded-full bg-outline"></span>
+<span class="tabular-nums font-medium text-primary">$650.00 MXN</span>
+</div>
+</div>
+</div>
+<div class="shrink-0 pl-2">
+<button aria-checked="false" class="w-12 h-7 rounded-full bg-surface-variant flex items-center p-0.5 transition-colors duration-200" onclick="togglePayment(this)" role="switch" type="button">
+<span class="w-6 h-6 rounded-full bg-primary shadow-md transform transition-transform duration-200 flex items-center justify-center">
+<span class="material-symbols-outlined text-[14px] text-surface hidden">check</span>
+</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 2: Me Deben (Préstamos Activos) -->
+<section class="flex flex-col space-y-3 transition-opacity duration-300" id="section-prestamos">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-outline text-[18px]">handshake</span>
+<h3 class="font-title-md text-title-md text-primary">Me Deben (Por Cobrar)</h3>
+</div>
+<span class="font-label-sm text-label-sm text-outline">Recaudando</span>
+</div>
+<!-- Prominent Debtor Card 1: Alejandra M. -->
+<div class="p-5 rounded-lg bg-surface-container/80 backdrop-blur-2xl shadow-xl flex flex-col space-y-4">
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-3">
+<img class="w-11 h-11 rounded-full object-cover grayscale brightness-110 shadow-sm" data-alt="Monochrome minimalist artistic portrait of a woman looking sideways with clean studio lighting, high contrast black and white fine art aesthetic" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCPogzVfMZPWiC0Np1l7l5uOI5o-6Rw0AGz0Gaq0bve-G3Ca3G44ZBQhrP8Dk_QvDqBTOmzaS1oM6zN-ANIIG44i8grm0K3OXhn4GSewGIOQxDMxEdziwMgVRaW4hQTKqcP_jSzSJwx7LSZzGsJokcHtfrOzNXfcQmTwlZfxFAGZLpaJnZ_nRpDOc7DQaJf82ECH-lx89GFuDp4i3hnB48bN2gEkf2BbGxU93h4O8c"/>
+<div class="flex flex-col">
+<span class="font-title-md text-title-md text-primary">Alejandra M.</span>
+<span class="font-label-md text-label-md text-outline truncate max-w-[180px]">Cena cumpleaños compartida</span>
+</div>
+</div>
+<div class="flex flex-col items-end">
+<span class="font-title-md text-title-md text-primary tabular-nums">$250.00</span>
+<span class="font-label-sm text-label-sm text-outline">Resta por liquidar</span>
+</div>
+</div>
+<!-- Repayment Progress -->
+<div class="space-y-1.5 p-3 rounded bg-surface-container-low/70">
+<div class="flex justify-between items-center font-label-sm text-label-sm">
+<span class="text-outline">Total prestado: <strong class="text-on-surface tabular-nums">$500.00</strong></span>
+<span class="text-primary font-semibold">50% devuelto</span>
+</div>
+<div class="w-full h-1.5 rounded-full bg-surface-container-highest overflow-hidden">
+<div class="h-full bg-primary rounded-full transition-all duration-500" style="width: 50%;"></div>
+</div>
+<div class="flex justify-between text-[11px] text-outline pt-0.5">
+<span>Abonado: $250.00 MXN</span>
+<span>Faltan: $250.00 MXN</span>
+</div>
+</div>
+<div class="flex items-center justify-between gap-3 pt-1">
+<button class="h-10 px-3.5 rounded-full bg-surface-variant/60 text-on-surface font-label-md text-label-md flex items-center justify-center gap-1.5 active:scale-95 transition-all" onclick="sendReminder('Alejandra M.')" type="button">
+<span class="material-symbols-outlined text-[16px]">notifications</span>
+          Recordar
+        </button>
+<button class="h-10 px-4 rounded-full bg-primary text-on-primary font-label-md text-label-md font-semibold flex items-center justify-center gap-1 shadow-md active:scale-95 transition-all" onclick="openAbonoModal('Alejandra M.', 250)" type="button">
+<span class="material-symbols-outlined text-[16px]">add_circle</span>
+          + Registrar Abono
+        </button>
+</div>
+</div>
+<!-- Debtor Card 2: Carlos R. -->
+<div class="p-4 rounded-lg bg-surface-container/60 backdrop-blur-xl flex items-center justify-between shadow-sm">
+<div class="flex items-center gap-3 min-w-0">
+<div class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center text-primary font-title-md text-title-md shrink-0">
+          CR
+        </div>
+<div class="flex flex-col min-w-0">
+<span class="font-title-md text-title-md text-primary truncate">Carlos R.</span>
+<span class="font-label-md text-label-md text-outline truncate">Boletos concierto</span>
+</div>
+</div>
+<div class="flex items-center gap-3 shrink-0">
+<div class="flex flex-col items-end">
+<span class="font-title-md text-title-md text-primary tabular-nums">$400.00</span>
+<span class="font-label-sm text-label-sm text-outline">Sin abonos</span>
+</div>
+<button class="h-9 px-3 rounded-full bg-surface-bright text-primary font-label-md text-label-md font-medium flex items-center justify-center gap-1 active:scale-95 transition-all shadow-sm" onclick="openAbonoModal('Carlos R.', 400)" type="button">
+<span>+ Abono</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Primary Action: + Nuevo Gasto Fijo o Préstamo -->
+<div class="pt-2">
+<button class="w-full h-13 py-3 px-5 rounded-full bg-surface-container-high backdrop-blur-2xl text-primary font-title-md text-title-md flex items-center justify-center gap-2 shadow-lg active:scale-98 transition-all hover:bg-surface-bright" onclick="openNewModal()" type="button">
+<span class="material-symbols-outlined text-[20px]">add</span>
+      + Nuevo Gasto Fijo o Préstamo
+    </button>
+</div>
+<!-- Bottom Sheet / Modal for Registering Abono (Hidden by default) -->
+<div class="fixed inset-0 z-50 bg-background/80 backdrop-blur-md opacity-0 pointer-events-none transition-opacity duration-300 flex flex-col justify-end" id="abono-modal">
+<div class="w-full rounded-t-lg bg-surface-container-low p-6 flex flex-col space-y-4 max-w-md mx-auto shadow-2xl transform translate-y-full transition-transform duration-300" id="abono-sheet">
+<!-- Drag handle -->
+<div class="w-10 h-1 bg-outline/40 rounded-full mx-auto mb-1"></div>
+<div class="flex justify-between items-center">
+<div>
+<span class="font-label-sm text-label-sm text-outline uppercase tracking-wider">Abono directo</span>
+<h3 class="font-headline-sm text-headline-sm text-primary tracking-tight" id="modal-debtor-name">Alejandra M.</h3>
+</div>
+<button class="w-8 h-8 rounded-full bg-surface-variant flex items-center justify-center text-outline hover:text-primary" onclick="closeAbonoModal()" type="button">
+<span class="material-symbols-outlined text-[18px]">close</span>
+</button>
+</div>
+<div class="p-4 rounded bg-surface-container flex flex-col space-y-1">
+<label class="font-label-sm text-label-sm text-outline">Monto a abonar (MXN)</label>
+<div class="flex items-baseline gap-2">
+<span class="text-headline-md font-currency-stat text-primary tabular-nums">$</span>
+<input class="w-full bg-transparent text-primary font-currency-stat text-headline-md tracking-tight focus:outline-none tabular-nums" id="abono-amount-input" placeholder="100.00" type="number"/>
+</div>
+</div>
+<div class="flex gap-2">
+<button class="flex-1 py-1.5 rounded-full bg-surface-variant text-on-surface font-label-md text-label-md active:scale-95 transition-all" onclick="quickFill(50)" type="button">+$50</button>
+<button class="flex-1 py-1.5 rounded-full bg-surface-variant text-on-surface font-label-md text-label-md active:scale-95 transition-all" onclick="quickFill(100)" type="button">+$100</button>
+<button class="flex-1 py-1.5 rounded-full bg-surface-variant text-on-surface font-label-md text-label-md active:scale-95 transition-all" onclick="quickFillFull()" type="button">Total</button>
+</div>
+<button class="w-full h-12 rounded-full bg-primary text-on-primary font-title-md text-title-md font-semibold flex items-center justify-center gap-2 shadow-lg active:scale-98 transition-all" onclick="confirmAbono()" type="button">
+        Confirmar Registro
+      </button>
+</div>
+</div>
+<!-- Toast Feedback -->
+<div class="fixed bottom-24 left-1/2 -translate-x-1/2 px-4 py-2.5 rounded-full bg-inverse-surface text-inverse-on-surface font-label-md text-label-md shadow-2xl opacity-0 pointer-events-none transition-all duration-300 z-50 flex items-center gap-2" id="toast">
+<span class="material-symbols-outlined text-[18px] text-on-primary-fixed">check_circle</span>
+<span id="toast-text">Acción completada</span>
+</div>
+</div>
+<script>
+  let currentMaxAbono = 250;
+
+  function setFilter(type, button) {
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.classList.remove('bg-surface-bright', 'text-primary', 'shadow-sm');
+      btn.classList.add('text-outline');
+    });
+    button.classList.add('bg-surface-bright', 'text-primary', 'shadow-sm');
+    button.classList.remove('text-outline');
+
+    const secFijos = document.getElementById('section-fijos');
+    const secPrestamos = document.getElementById('section-prestamos');
+
+    if (type === 'todos') {
+      secFijos.style.display = 'flex';
+      secPrestamos.style.display = 'flex';
+    } else if (type === 'suscripciones') {
+      secFijos.style.display = 'flex';
+      secPrestamos.style.display = 'none';
+    } else if (type === 'prestamos') {
+      secFijos.style.display = 'none';
+      secPrestamos.style.display = 'flex';
+    }
+  }
+
+  function togglePayment(button) {
+    const isChecked = button.getAttribute('aria-checked') === 'true';
+    const knob = button.querySelector('span');
+    const checkIcon = knob.querySelector('span');
+
+    if (!isChecked) {
+      button.setAttribute('aria-checked', 'true');
+      button.classList.remove('bg-surface-variant');
+      button.classList.add('bg-primary');
+      knob.classList.add('translate-x-5');
+      knob.classList.remove('bg-primary');
+      knob.classList.add('bg-on-primary-fixed');
+      checkIcon.classList.remove('hidden');
+      checkIcon.classList.add('text-primary');
+      showToast('Gasto marcado como pagado');
+    } else {
+      button.setAttribute('aria-checked', 'false');
+      button.classList.add('bg-surface-variant');
+      button.classList.remove('bg-primary');
+      knob.classList.remove('translate-x-5');
+      knob.classList.remove('bg-on-primary-fixed');
+      knob.classList.add('bg-primary');
+      checkIcon.classList.add('hidden');
+      showToast('Gasto marcado como pendiente');
+    }
+  }
+
+  function openAbonoModal(name, maxDebt) {
+    currentMaxAbono = maxDebt;
+    document.getElementById('modal-debtor-name').innerText = name;
+    document.getElementById('abono-amount-input').value = '';
+    const modal = document.getElementById('abono-modal');
+    const sheet = document.getElementById('abono-sheet');
+    modal.classList.remove('pointer-events-none', 'opacity-0');
+    sheet.classList.remove('translate-y-full');
+  }
+
+  function closeAbonoModal() {
+    const modal = document.getElementById('abono-modal');
+    const sheet = document.getElementById('abono-sheet');
+    sheet.classList.add('translate-y-full');
+    modal.classList.add('opacity-0');
+    setTimeout(() => {
+      modal.classList.add('pointer-events-none');
+    }, 300);
+  }
+
+  function quickFill(val) {
+    const input = document.getElementById('abono-amount-input');
+    const current = parseFloat(input.value) || 0;
+    input.value = (current + val).toFixed(2);
+  }
+
+  function quickFillFull() {
+    document.getElementById('abono-amount-input').value = currentMaxAbono.toFixed(2);
+  }
+
+  function confirmAbono() {
+    const amount = document.getElementById('abono-amount-input').value;
+    if (!amount || parseFloat(amount) <= 0) {
+      showToast('Ingresa un monto válido');
+      return;
+    }
+    closeAbonoModal();
+    showToast(`Abono de $${parseFloat(amount).toFixed(2)} registrado con éxito`);
+  }
+
+  function sendReminder(name) {
+    showToast(`Recordatorio enviado a ${name}`);
+  }
+
+  function openNewModal() {
+    showToast('Añadir nuevo registro');
+  }
+
+  function showToast(message) {
+    const toast = document.getElementById('toast');
+    document.getElementById('toast-text').innerText = message;
+    toast.classList.remove('opacity-0', 'pointer-events-none');
+    toast.classList.add('opacity-100');
+    setTimeout(() => {
+      toast.classList.remove('opacity-100');
+      toast.classList.add('opacity-0', 'pointer-events-none');
+    }, 2400);
+  }
+</script></main><div class="fixed bottom-0 inset-x-0 z-50 pointer-events-none pb-safe flex flex-col items-center"><nav class="pointer-events-auto mb-3 w-[calc(100%-2.5rem)] max-w-sm h-16 rounded-full px-2 flex items-center justify-around bg-[rgba(255,255,255,0.08)] backdrop-blur-[24px] shadow-[0_12px_36px_0_rgba(0,0,0,0.75)]" data-active-classes="text-primary opacity-100"><a class="flex flex-col items-center justify-center min-w-[44px] min-h-[44px] text-on-surface-variant opacity-70 hover:opacity-100 transition-opacity" data-path="inicio" href="#"><span class="material-symbols-outlined text-[22px]">home</span><span class="font-label-sm text-[10px] tracking-normal mt-0.5">Inicio</span></a><a class="flex flex-col items-center justify-center min-w-[44px] min-h-[44px] text-on-surface-variant opacity-70 hover:opacity-100 transition-opacity" data-path="calendario" href="#"><span class="material-symbols-outlined text-[22px]">calendar_today</span><span class="font-label-sm text-[10px] tracking-normal mt-0.5">Calendario</span></a><a class="flex items-center justify-center w-11 h-11 rounded-full bg-primary text-on-primary shadow-[0_4px_14px_rgba(255,255,255,0.25)] active:scale-95 transition-transform" data-path="nuevo-movimiento" href="#"><span class="material-symbols-outlined text-[26px] font-bold">add</span></a><a class="flex flex-col items-center justify-center min-w-[44px] min-h-[44px] text-on-surface-variant opacity-70 hover:opacity-100 transition-opacity" data-path="tarjetas" href="#"><span class="material-symbols-outlined text-[22px]">credit_card</span><span class="font-label-sm text-[10px] tracking-normal mt-0.5">Tarjetas</span></a><a aria-current="page" class="flex flex-col items-center justify-center min-w-[44px] min-h-[44px] transition-opacity text-primary opacity-100" data-path="fijos" href="#"><span class="material-symbols-outlined text-[22px]">repeat</span><span class="font-label-sm text-[10px] tracking-normal mt-0.5">Fijos</span></a></nav><div class="w-32 h-1 bg-primary/40 rounded-full mb-1.5"></div></div></body></html>

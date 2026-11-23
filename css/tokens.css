@@ -1,0 +1,112 @@
+/* ============================================================================
+   Slice Design System - Liquid Glass Monochromatic (iOS Spatial OLED)
+   Reference: liquid_glass_monochromatic/DESIGN.md
+   ============================================================================ */
+
+:root {
+  /* Core Monochromatic OLED Palette */
+  --bg-canvas: #000000;
+  --surface-lowest: #0a0a0c;
+  --surface-low: #131316;
+  --surface-container: #1b1b1f;
+  --surface-high: #242429;
+  --surface-highest: #323238;
+  --surface-bright: #3e3e46;
+
+  /* Typography & Hierarchy */
+  --primary: #ffffff;
+  --on-primary: #000000;
+  --secondary: #e4e4e7;
+  --text-primary: #ffffff;
+  --text-secondary: #a1a1aa;
+  --text-muted: #71717a;
+  --error: #ffb4ab;
+
+  /* Liquid Glass Materials */
+  --glass-fill-base: rgba(255, 255, 255, 0.055);
+  --glass-fill-elevated: rgba(255, 255, 255, 0.09);
+  --glass-fill-recessed: rgba(14, 14, 17, 0.72);
+  --glass-fill-sheet: rgba(16, 16, 20, 0.92);
+  --glass-fill-nav: rgba(20, 20, 24, 0.76);
+
+  /* Specular Borders & Strokes */
+  --border-specular-top: rgba(255, 255, 255, 0.24);
+  --border-specular-mid: rgba(255, 255, 255, 0.12);
+  --border-specular-bottom: rgba(255, 255, 255, 0.04);
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-focus: rgba(255, 255, 255, 0.45);
+
+  /* Radii (Squircle & Capsule Geometry) */
+  --radius-xs: 8px;
+  --radius-sm: 12px;
+  --radius-md: 16px;
+  --radius-lg: 22px;
+  --radius-xl: 28px;
+  --radius-sheet: 32px;
+  --radius-full: 9999px;
+
+  /* Spacing & Safe Areas */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 20px;
+  --space-xl: 28px;
+  --screen-margin: 20px;
+  --safe-top: env(safe-area-inset-top, 16px);
+  --safe-bottom: env(safe-area-inset-bottom, 20px);
+
+  /* Typography Engine */
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', sans-serif;
+  --font-mono: 'SF Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100dvh;
+  background-color: var(--bg-canvas);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: 15px;
+  line-height: 1.4;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overscroll-behavior-y: none;
+}
+
+/* Pure Tabular Numerals for all Financial Values */
+.tabular-nums {
+  font-variant-numeric: tabular-nums lining-nums;
+  font-feature-settings: "tnum" 1, "lnum" 1;
+}
+
+/* Hide scrollbars while keeping smooth touch scroll */
+::-webkit-scrollbar {
+  display: none;
+}
+* {
+  scrollbar-width: none;
+}
+
+button,
+input,
+select {
+  font-family: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  padding: 0;
+}

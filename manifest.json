@@ -1,0 +1,18 @@
+{
+  "name": "Slice — Finanzas Personales",
+  "short_name": "Slice",
+  "description": "Gestor financiero personal mobile-first para liquidez, tarjetas de crédito, MSI y gastos fijos en MXN.",
+  "start_url": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#000000",
+  "theme_color": "#000000",
+  "icons": [
+    {
+      "src": "./assets/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
