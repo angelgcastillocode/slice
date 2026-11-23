@@ -170,18 +170,32 @@
     <!-- Soft Bottom Scrim behind Floating Dock -->
     <div class="bottom-fade-scrim" aria-hidden="true"></div>
 
-    <!-- Floating Liquid Navigation Bar -->
+    <!-- Floating iOS 26 Liquid Glass Dock (4-Tab Capsule + Detached Sky-Blue FAB) -->
     <div class="floating-nav-wrapper">
-      <nav class="floating-nav" aria-label="Navegación principal">
-        <button type="button" class="nav-item active" data-tab="inicio">
-          <span class="material-symbols-outlined" aria-hidden="true" style="font-size:22px;">home</span>
-          <span class="nav-item-label">Inicio</span>
-        </button>
+      <div class="floating-dock-row">
+        <nav class="floating-nav" id="floating-nav-capsule" aria-label="Navegación principal">
+          <div class="nav-glass-lens" id="nav-glass-lens" aria-hidden="true"></div>
 
-        <button type="button" class="nav-item" data-tab="calendario">
-          <span class="material-symbols-outlined" aria-hidden="true" style="font-size:22px;">calendar_today</span>
-          <span class="nav-item-label">Calendario</span>
-        </button>
+          <button type="button" class="nav-item active" data-tab="inicio" data-tab-index="0">
+            <span class="material-symbols-outlined" aria-hidden="true" style="font-size:22px;">home</span>
+            <span class="nav-item-label">Inicio</span>
+          </button>
+
+          <button type="button" class="nav-item" data-tab="calendario" data-tab-index="1">
+            <span class="material-symbols-outlined" aria-hidden="true" style="font-size:22px;">calendar_today</span>
+            <span class="nav-item-label">Calendario</span>
+          </button>
+
+          <button type="button" class="nav-item" data-tab="tarjetas" data-tab-index="2">
+            <span class="material-symbols-outlined" aria-hidden="true" style="font-size:22px;">credit_card</span>
+            <span class="nav-item-label">Tarjetas</span>
+          </button>
+
+          <button type="button" class="nav-item" data-tab="fijos" data-tab-index="3">
+            <span class="material-symbols-outlined" aria-hidden="true" style="font-size:22px;">repeat</span>
+            <span class="nav-item-label">Fijos</span>
+          </button>
+        </nav>
 
         <button
           type="button"
@@ -191,17 +205,7 @@
         >
           <span class="material-symbols-outlined" aria-hidden="true" style="font-size:26px;font-weight:700;">add</span>
         </button>
-
-        <button type="button" class="nav-item" data-tab="tarjetas">
-          <span class="material-symbols-outlined" aria-hidden="true" style="font-size:22px;">credit_card</span>
-          <span class="nav-item-label">Tarjetas</span>
-        </button>
-
-        <button type="button" class="nav-item" data-tab="fijos">
-          <span class="material-symbols-outlined" aria-hidden="true" style="font-size:22px;">repeat</span>
-          <span class="nav-item-label">Fijos</span>
-        </button>
-      </nav>
+      </div>
     </div>
   </div>
 

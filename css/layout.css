@@ -129,6 +129,16 @@ body::before {
   display: flex;
 }
 
+.view-section.is-swiping {
+  will-change: transform, opacity;
+  transition: none !important;
+  animation: none !important;
+}
+
+.view-section.is-snapping-back {
+  transition: transform 280ms var(--ease-ios), opacity 220ms ease;
+}
+
 .view-section.view-entering {
   animation: sliceViewEnter var(--dur-view) var(--ease-ios) both;
 }
@@ -143,6 +153,19 @@ body::before {
 .view-section.view-entering > *:nth-child(4) { animation-delay: 105ms; }
 .view-section.view-entering > *:nth-child(5) { animation-delay: 140ms; }
 .view-section.view-entering > *:nth-child(n+6) { animation-delay: 160ms; }
+
+.view-section.view-enter-from-right {
+  animation: sliceEnterFromRight 260ms var(--ease-ios) both;
+}
+
+.view-section.view-enter-from-left {
+  animation: sliceEnterFromLeft 260ms var(--ease-ios) both;
+}
+
+.view-section.view-enter-from-right > *,
+.view-section.view-enter-from-left > * {
+  animation: none;
+}
 
 @keyframes sliceViewEnter {
   from {
@@ -163,6 +186,28 @@ body::before {
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes sliceEnterFromRight {
+  from {
+    opacity: 0.25;
+    transform: translate3d(34px, 0, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes sliceEnterFromLeft {
+  from {
+    opacity: 0.25;
+    transform: translate3d(-34px, 0, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
   }
 }
 
@@ -206,19 +251,19 @@ body::before {
   left: 0;
   right: 0;
   bottom: 0;
-  height: calc(var(--safe-bottom) + 132px);
+  height: calc(var(--safe-bottom) + 144px);
   z-index: 42;
   pointer-events: none;
   background: linear-gradient(
     to bottom,
     rgba(0, 0, 0, 0) 0%,
-    rgba(0, 0, 0, 0.48) 40%,
-    rgba(0, 0, 0, 0.88) 78%,
-    rgba(0, 0, 0, 0.96) 100%
+    rgba(0, 0, 0, 0.60) 36%,
+    rgba(0, 0, 0, 0.92) 72%,
+    rgba(0, 0, 0, 0.98) 100%
   );
 }
 
-/* Floating Liquid Navigation Bar (Level 3) */
+/* Floating iOS 26 Liquid Glass Navigation Dock (4-Tab Capsule + Detached Sky-Blue FAB) */
 .floating-nav-wrapper {
   position: fixed;
   bottom: 0;
@@ -232,61 +277,108 @@ body::before {
   align-items: center;
 }
 
-.floating-nav {
-  pointer-events: auto;
-  width: calc(100% - 36px);
-  max-width: 396px;
-  height: 64px;
-  border-radius: var(--radius-full);
-  padding: 0 10px;
+.floating-dock-row {
+  width: calc(100% - 28px);
+  max-width: 408px;
   display: flex;
   align-items: center;
-  justify-content: space-around;
-  background: linear-gradient(180deg, rgba(22, 27, 35, 0.72) 0%, rgba(12, 15, 21, 0.78) 100%);
-  backdrop-filter: blur(26px) saturate(185%);
-  -webkit-backdrop-filter: blur(26px) saturate(185%);
+  gap: 11px;
+  pointer-events: none;
+}
+
+.floating-nav {
+  pointer-events: auto;
+  flex: 1;
+  min-width: 0;
+  height: 62px;
+  border-radius: var(--radius-full);
+  padding: 4px;
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  align-items: center;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  background: linear-gradient(180deg, rgba(22, 27, 35, 0.76) 0%, rgba(11, 14, 20, 0.84) 100%);
+  backdrop-filter: blur(28px) saturate(190%);
+  -webkit-backdrop-filter: blur(28px) saturate(190%);
   border: var(--hairline) solid var(--border-hairline-strong);
   box-shadow:
     var(--specular-top-float),
-    inset 0 -1px 0 rgba(90, 200, 250, 0.06),
-    0 16px 38px rgba(0, 0, 0, 0.82);
+    inset 0 -1px 0 rgba(90, 200, 250, 0.08),
+    0 16px 38px rgba(0, 0, 0, 0.84);
+}
+
+.nav-glass-lens {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  width: calc((100% - 8px) / 4);
+  height: calc(100% - 8px);
+  border-radius: var(--radius-full);
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    rgba(125, 211, 252, 0.22) 0%,
+    rgba(90, 200, 250, 0.13) 50%,
+    rgba(255, 255, 255, 0.06) 100%
+  );
+  backdrop-filter: blur(18px) saturate(210%) brightness(1.12);
+  -webkit-backdrop-filter: blur(18px) saturate(210%) brightness(1.12);
+  border: var(--hairline) solid rgba(125, 211, 252, 0.36);
+  box-shadow:
+    inset 0 1.5px 0 rgba(255, 255, 255, 0.44),
+    inset 0 -1px 0 rgba(90, 200, 250, 0.16),
+    0 4px 16px rgba(56, 189, 248, 0.18),
+    0 2px 8px rgba(0, 0, 0, 0.32);
+  transform: translate3d(0, 0, 0);
+  transition: transform 340ms var(--ease-ios);
+  will-change: transform;
+}
+
+.nav-glass-lens.is-instant,
+.nav-glass-lens.is-scrubbing {
+  transition: none;
+}
+
+.nav-glass-lens.is-scrubbing {
+  border-color: rgba(125, 211, 252, 0.54);
 }
 
 .nav-item {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: 54px;
+  min-width: 0;
+  border-radius: var(--radius-full);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-width: 58px;
-  min-height: 46px;
-  border-radius: var(--radius-full);
   color: var(--text-muted);
   transition:
-    transform var(--dur-tap) var(--ease-ios),
-    color var(--dur-fast) ease,
-    background-color var(--dur-fast) ease;
-  position: relative;
+    transform 180ms var(--ease-ios),
+    color 160ms ease;
 }
 
 .nav-item.active {
-  color: var(--sky);
-  background: var(--sky-tint);
-  box-shadow: inset 0 1px 0 rgba(125, 211, 252, 0.20);
+  color: var(--sky-light);
 }
 
-.nav-item.active::after {
-  content: '';
-  position: absolute;
-  bottom: 3px;
-  width: 14px;
-  height: 2.5px;
-  border-radius: var(--radius-full);
-  background: var(--sky-light);
-  box-shadow: 0 0 8px var(--sky-glow);
+.floating-nav.is-scrubbing .nav-item.active:not(.is-lens-focus) {
+  color: var(--text-muted);
+}
+
+.nav-item.is-lens-focus {
+  color: var(--sky-light);
+  transform: scale(1.08);
 }
 
 .nav-item:active {
-  transform: scale(0.94);
+  transform: scale(0.95);
 }
 
 .nav-item-label {
@@ -296,19 +388,32 @@ body::before {
   margin-top: 2px;
 }
 
-/* Central Sky-Blue Capsule (+) Action Button */
+/* Detached Right Sky-Blue Liquid Glass (+) Sphere */
 .nav-fab {
-  width: 46px;
-  height: 46px;
+  pointer-events: auto;
+  flex-shrink: 0;
+  width: 60px;
+  height: 60px;
   border-radius: 50%;
-  background: linear-gradient(180deg, var(--sky-light) 0%, var(--sky) 50%, var(--sky-vivid) 100%);
+  background: radial-gradient(
+    circle at 32% 24%,
+    rgba(224, 242, 254, 0.94) 0%,
+    rgba(125, 211, 252, 0.90) 30%,
+    rgba(90, 200, 250, 0.93) 64%,
+    rgba(56, 189, 248, 0.98) 100%
+  );
+  backdrop-filter: blur(24px) saturate(185%);
+  -webkit-backdrop-filter: blur(24px) saturate(185%);
+  border: var(--hairline) solid rgba(224, 242, 254, 0.56);
   color: var(--on-sky);
   display: flex;
   align-items: center;
   justify-content: center;
   box-shadow:
-    0 6px 20px rgba(56, 189, 248, 0.34),
-    inset 0 1px 0 rgba(255, 255, 255, 0.58);
+    0 10px 28px rgba(56, 189, 248, 0.34),
+    0 14px 32px rgba(0, 0, 0, 0.65),
+    inset 0 1.5px 0 rgba(255, 255, 255, 0.72),
+    inset 0 -2px 6px rgba(2, 17, 27, 0.16);
   transition:
     transform var(--dur-tap) var(--ease-ios),
     opacity var(--dur-tap) ease;

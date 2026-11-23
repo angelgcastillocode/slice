@@ -31,8 +31,14 @@ import { renderDashboardView } from './dashboardView.js';
 import { renderCalendarView } from './calendarView.js';
 import { renderCardsView } from './cardsView.js';
 import { renderRecurringView } from './recurringView.js';
-import { openQuickEntryModal } from './quickEntryModal.js';
+import { closeQuickEntryModal, openQuickEntryModal } from './quickEntryModal.js';
 import { openReconcileModal } from './reconcileModal.js';
+import {
+  TAB_ORDER,
+  initDockController,
+  initScreenSwipeController,
+  initSheetDismissGestures
+} from './gestures.js';
 
 const TAB_TITLES = {
   inicio: 'Inicio',
@@ -44,6 +50,7 @@ const TAB_TITLES = {
 let toastTimer = null;
 let lastRenderedTab = null;
 let viewEnterTimer = null;
+let dockController = null;
 
 function revealModalOverlay(overlayEl) {
   if (!overlayEl) return;
@@ -209,13 +216,23 @@ function renderApp(state) {
   };
 
   const tabChanged = state.activeTab !== lastRenderedTab;
+  const prevIdx = TAB_ORDER.indexOf(lastRenderedTab);
+  const nextIdx = TAB_ORDER.indexOf(state.activeTab);
 
   for (const [tabKey, sectionEl] of Object.entries(views)) {
     if (!sectionEl) continue;
     const isActive = tabKey === state.activeTab;
     sectionEl.classList.toggle('active', isActive);
     if (tabChanged) {
-      sectionEl.classList.remove('view-entering');
+      sectionEl.classList.remove(
+        'view-entering',
+        'view-enter-from-right',
+        'view-enter-from-left',
+        'is-swiping',
+        'is-snapping-back'
+      );
+      sectionEl.style.transform = '';
+      sectionEl.style.opacity = '';
     }
   }
 
@@ -233,14 +250,27 @@ function renderApp(state) {
   if (tabChanged) {
     const activeSection = views[state.activeTab];
     if (activeSection) {
+      if (prevIdx !== -1) {
+        window.scrollTo(0, 0);
+      }
       void activeSection.offsetWidth;
       activeSection.classList.add('view-entering');
+      if (prevIdx !== -1 && nextIdx !== -1 && nextIdx !== prevIdx) {
+        activeSection.classList.add(
+          nextIdx > prevIdx ? 'view-enter-from-right' : 'view-enter-from-left'
+        );
+      }
       if (viewEnterTimer) clearTimeout(viewEnterTimer);
       viewEnterTimer = setTimeout(() => {
-        activeSection.classList.remove('view-entering');
+        activeSection.classList.remove(
+          'view-entering',
+          'view-enter-from-right',
+          'view-enter-from-left'
+        );
       }, 650);
     }
     lastRenderedTab = state.activeTab;
+    dockController?.syncActiveTab(state.activeTab, { instant: prevIdx === -1 });
   }
 }
 
@@ -874,12 +904,41 @@ async function bootstrap() {
     showToast('Sesión iniciada');
   });
 
-  // Wire bottom navigation bar
+  // Wire Liquid Glass draggable dock, screen swipe navigation & sheet drag-down dismiss
+  dockController = initDockController({
+    navEl: document.getElementById('floating-nav-capsule'),
+    lensEl: document.getElementById('nav-glass-lens'),
+    getActiveTab: () => getState().activeTab,
+    onSelectTab: (tab) => setState({ activeTab: tab }, false)
+  });
+
   document.querySelectorAll('.nav-item[data-tab]').forEach((btn) => {
     btn.addEventListener('click', (e) => {
       e.preventDefault();
+      if (dockController?.shouldIgnoreClick()) return;
       setState({ activeTab: btn.getAttribute('data-tab') }, false);
     });
+  });
+
+  initScreenSwipeController({
+    mainEl: document.querySelector('.main-content'),
+    getActiveTab: () => getState().activeTab,
+    isSwipeAllowed: () =>
+      Boolean(getState().user) && !document.querySelector('.modal-overlay.open'),
+    getActiveViewSection: () => document.querySelector('.view-section.active'),
+    dockController,
+    onSelectTab: (tab) => setState({ activeTab: tab }, false)
+  });
+
+  initSheetDismissGestures({
+    overlayIds: ['modal-quick-entry', 'modal-reconcile', 'modal-auxiliary'],
+    onDismissOverlay: (el) => {
+      if (el.id === 'modal-quick-entry') {
+        closeQuickEntryModal(el);
+      } else {
+        el.classList.remove('open');
+      }
+    }
   });
 
   document.getElementById('btn-open-quick-entry')?.addEventListener('click', (e) => {
@@ -905,7 +964,11 @@ async function bootstrap() {
     const el = document.getElementById(id);
     el?.addEventListener('click', (e) => {
       if (e.target === el) {
-        el.classList.remove('open');
+        if (id === 'modal-quick-entry') {
+          closeQuickEntryModal(el);
+        } else {
+          el.classList.remove('open');
+        }
       }
     });
   });

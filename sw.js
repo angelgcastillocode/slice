@@ -1,4 +1,4 @@
-const CACHE_NAME = 'slice-shell-v4';
+const CACHE_NAME = 'slice-shell-v5';
 const APP_SHELL_ASSETS = [
   './',
   './index.html',
@@ -17,6 +17,7 @@ const APP_SHELL_ASSETS = [
   './js/engine/accounting.js',
   './js/services/api.js',
   './js/ui/app.js',
+  './js/ui/gestures.js',
   './js/ui/dashboardView.js',
   './js/ui/calendarView.js',
   './js/ui/cardsView.js',
