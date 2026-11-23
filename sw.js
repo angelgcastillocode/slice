@@ -1,4 +1,4 @@
-const CACHE_NAME = 'slice-shell-v2';
+const CACHE_NAME = 'slice-shell-v3';
 const APP_SHELL_ASSETS = [
   './',
   './index.html',

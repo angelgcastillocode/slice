@@ -2,7 +2,13 @@
  * Slice - Orquestador Principal del Cliente PWA (Conectado a Supabase Auth & PostgREST)
  */
 
-import { initAuth, signInWithPassword, signOut } from '../auth.js';
+import {
+  getRememberedAuthPrefs,
+  initAuth,
+  saveRememberedAuthPrefs,
+  signInWithPassword,
+  signOut
+} from '../auth.js';
 import { addMonthsToYM, formatCentsToMXN, parseMXNToCents } from '../engine/dateUtils.js';
 import {
   clearMemoryState,
@@ -114,14 +120,42 @@ function getHandlers() {
   };
 }
 
+function hydrateAuthForm() {
+  const emailInput = document.getElementById('auth-email');
+  const passwordInput = document.getElementById('auth-password');
+  const rememberCheckbox = document.getElementById('auth-remember');
+  const { rememberMe, savedEmail } = getRememberedAuthPrefs();
+
+  if (rememberCheckbox) {
+    rememberCheckbox.checked = rememberMe;
+  }
+
+  if (rememberMe && savedEmail) {
+    if (emailInput) {
+      emailInput.value = savedEmail;
+    }
+    if (passwordInput) {
+      passwordInput.focus();
+    }
+  } else if (!rememberMe && emailInput) {
+    emailInput.value = '';
+  }
+}
+
 function toggleAuthVsAppScreen(isAuthenticated) {
   const authScreen = document.getElementById('auth-screen');
   const appShell = document.getElementById('app-shell');
+  const wasHidden = authScreen ? authScreen.style.display !== 'flex' : false;
+
   if (authScreen) {
     authScreen.style.display = isAuthenticated ? 'none' : 'flex';
   }
   if (appShell) {
     appShell.style.display = isAuthenticated ? 'flex' : 'none';
+  }
+
+  if (!isAuthenticated && wasHidden) {
+    hydrateAuthForm();
   }
 }
 
@@ -765,10 +799,11 @@ async function bootstrap() {
     renderApp(state);
   });
 
-  // Wire Login Form (#auth-login-form)
-  const loginForm = document.getElementById('auth-login-form');
-  const emailInput = document.getElementById('auth-email-input');
-  const passwordInput = document.getElementById('auth-password-input');
+  // Wire Login Form (#auth-form)
+  const loginForm = document.getElementById('auth-form');
+  const emailInput = document.getElementById('auth-email');
+  const passwordInput = document.getElementById('auth-password');
+  const rememberCheckbox = document.getElementById('auth-remember');
   const errorBox = document.getElementById('auth-error-box');
   const submitBtn = document.getElementById('auth-submit-btn');
   const submitText = document.getElementById('auth-submit-text');
@@ -782,7 +817,12 @@ async function bootstrap() {
     if (submitBtn) submitBtn.disabled = true;
     if (submitText) submitText.textContent = 'Verificando...';
 
-    const { user, error } = await signInWithPassword(emailInput?.value, passwordInput?.value);
+    const normalizedEmail = String(emailInput?.value || '').trim().toLowerCase();
+    if (emailInput) {
+      emailInput.value = normalizedEmail;
+    }
+
+    const { user, error } = await signInWithPassword(normalizedEmail, passwordInput?.value);
 
     if (submitBtn) submitBtn.disabled = false;
     if (submitText) submitText.textContent = 'Iniciar Sesión';
@@ -794,6 +834,9 @@ async function bootstrap() {
       }
       return;
     }
+
+    const shouldRemember = rememberCheckbox ? rememberCheckbox.checked : true;
+    saveRememberedAuthPrefs(shouldRemember, normalizedEmail);
 
     if (passwordInput) passwordInput.value = '';
     setState({ user }, false);

@@ -19,7 +19,7 @@ export async function getSupabaseClient() {
       persistSession: true,
       autoRefreshToken: true,
       detectSessionInUrl: true,
-      storageKey: 'slice_supabase_auth_token'
+      storageKey: 'slice-auth-token'
     }
   });
   return supabaseInstance;

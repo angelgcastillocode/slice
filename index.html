@@ -60,15 +60,20 @@
         </div>
       </div>
 
-      <form id="auth-login-form" style="display:flex;flex-direction:column;gap:14px;">
+      <form id="auth-form" method="post" style="display:flex;flex-direction:column;gap:14px;">
         <div style="display:flex;flex-direction:column;gap:6px;">
-          <label class="label-eyebrow" for="auth-email-input">Correo Electrónico</label>
+          <label class="label-eyebrow" for="auth-email">Correo Electrónico</label>
           <div class="input-well">
             <span class="material-symbols-outlined" style="font-size:19px;color:var(--text-secondary);">mail</span>
             <input
               type="email"
-              id="auth-email-input"
-              autocomplete="email"
+              name="email"
+              id="auth-email"
+              autocomplete="username"
+              autocapitalize="none"
+              autocorrect="off"
+              spellcheck="false"
+              inputmode="email"
               placeholder="tu@correo.com"
               required
             />
@@ -76,18 +81,33 @@
         </div>
 
         <div style="display:flex;flex-direction:column;gap:6px;">
-          <label class="label-eyebrow" for="auth-password-input">Contraseña</label>
+          <label class="label-eyebrow" for="auth-password">Contraseña</label>
           <div class="input-well">
             <span class="material-symbols-outlined" style="font-size:19px;color:var(--text-secondary);">lock</span>
             <input
               type="password"
-              id="auth-password-input"
+              name="password"
+              id="auth-password"
               autocomplete="current-password"
               placeholder="••••••••••••"
               required
             />
           </div>
         </div>
+
+        <label class="glass-checkbox-row" for="auth-remember">
+          <input
+            type="checkbox"
+            id="auth-remember"
+            name="remember"
+            class="glass-checkbox-input"
+            checked
+          />
+          <span class="glass-checkbox-box" aria-hidden="true">
+            <span class="material-symbols-outlined glass-checkbox-check">check</span>
+          </span>
+          <span class="glass-checkbox-label">Recordar sesión y correo</span>
+        </label>
 
         <div
           id="auth-error-box"
