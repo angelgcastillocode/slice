@@ -165,7 +165,7 @@ export function renderCalendarView(container, state, handlers) {
                       <span class="label-eyebrow" style="display:block;font-size:10px;">MXN</span>
                     </div>
                   </div>
-                  <div style="display:flex;align-items:center;justify-content:space-between;padding-top:4px;border-top:1px solid rgba(255,255,255,0.06);">
+                  <div class="hairline-divider-top" style="display:flex;align-items:center;justify-content:space-between;padding-top:10px;">
                     <span class="text-subtle" style="font-size:11px;display:flex;align-items:center;gap:6px;">
                       <span class="cal-dot-recurring" style="display:inline-block;"></span>
                       Gasto Fijo Mensual
@@ -203,7 +203,7 @@ export function renderCalendarView(container, state, handlers) {
                       <span class="label-eyebrow" style="display:block;font-size:10px;">MXN</span>
                     </div>
                   </div>
-                  <div style="display:flex;align-items:center;justify-content:space-between;padding-top:4px;border-top:1px solid rgba(255,255,255,0.06);">
+                  <div class="hairline-divider-top" style="display:flex;align-items:center;justify-content:space-between;padding-top:10px;">
                     <span class="text-subtle" style="font-size:11px;display:flex;align-items:center;gap:6px;">
                       <span class="cal-dot-due" style="display:inline-block;"></span>
                       Fecha Límite Tarjeta
@@ -318,7 +318,7 @@ export function renderCalendarView(container, state, handlers) {
       </div>
       <div style="text-align:right;">
         <span class="label-eyebrow" style="font-size:10px;display:block;">Fijos Pendientes</span>
-        <span class="tabular-nums" style="font-size:13px;font-weight:600;color:var(--error);">
+        <span class="tabular-nums" style="font-size:13px;font-weight:600;color:var(--signal-warn);">
           -${formatCentsToMXN(metrics.pendingDebitRecurringCents)}
         </span>
       </div>
@@ -328,12 +328,12 @@ export function renderCalendarView(container, state, handlers) {
     <section style="display:flex;flex-direction:column;gap:12px;">
       <div style="display:flex;align-items:center;justify-content:space-between;">
         <div style="display:flex;align-items:center;gap:8px;">
-          <span class="pulse-dot"></span>
+          <span class="pulse-dot" aria-hidden="true"></span>
           <h3 class="card-title" style="margin:0;font-size:18px;">${formatLongDateES(selectedDateISO)}</h3>
         </div>
-        <span class="badge-pill">${selectedEvents.length + selectedTx.length} evento${selectedEvents.length + selectedTx.length === 1 ? '' : 's'}</span>
+        <span class="badge-pill badge-pill-sky tabular-nums">${selectedEvents.length + selectedTx.length} evento${selectedEvents.length + selectedTx.length === 1 ? '' : 's'}</span>
       </div>
-      <div style="display:flex;flex-direction:column;gap:10px;">
+      <div class="agenda-list" style="display:flex;flex-direction:column;gap:10px;">
         ${agendaHtml}
       </div>
     </section>

@@ -1,19 +1,34 @@
 /* ============================================================================
-   Slice Component Library - Liquid Glass Cards, Specular Borders, Switches & Modals
+   Slice Component Library - Hairline Liquid Glass, Sky Blue Accents & iOS Motion
    ============================================================================ */
 
-/* Level 1 & Level 2 Liquid Glass Cards with Top Specular Edge */
+/* Level 1 & Level 2 Liquid Glass Cards with Retina Hairline + Top Specular */
 .glass-card {
   position: relative;
   border-radius: var(--radius-lg);
   padding: 18px;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.07) 0%, rgba(255, 255, 255, 0.03) 100%);
+  background: linear-gradient(180deg, var(--glass-fill-top) 0%, var(--glass-fill-bottom) 100%);
   backdrop-filter: blur(24px) saturate(180%);
   -webkit-backdrop-filter: blur(24px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.10);
+  border: var(--hairline) solid var(--border-hairline);
   box-shadow:
-    inset 0 1px 0 0 rgba(255, 255, 255, 0.22),
-    0 8px 28px -4px rgba(0, 0, 0, 0.8);
+    var(--specular-top),
+    0 10px 28px -8px rgba(0, 0, 0, 0.78);
+}
+
+.glass-card-interactive,
+.glass-card[data-action],
+.carousel-card {
+  transition:
+    transform var(--dur-tap) var(--ease-ios),
+    border-color var(--dur-fast) ease,
+    background-color var(--dur-fast) ease;
+}
+
+.glass-card-interactive:active,
+.glass-card[data-action]:active,
+.carousel-card:active {
+  transform: scale(0.97);
 }
 
 .glass-card-hero {
@@ -21,32 +36,47 @@
   overflow: hidden;
   border-radius: var(--radius-xl);
   padding: 22px;
-  background: linear-gradient(165deg, rgba(255, 255, 255, 0.11) 0%, rgba(255, 255, 255, 0.035) 100%);
-  backdrop-filter: blur(32px) saturate(190%);
-  -webkit-backdrop-filter: blur(32px) saturate(190%);
-  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: linear-gradient(
+    160deg,
+    rgba(90, 200, 250, 0.085) 0%,
+    rgba(255, 255, 255, 0.052) 38%,
+    rgba(255, 255, 255, 0.028) 100%
+  );
+  backdrop-filter: blur(28px) saturate(190%);
+  -webkit-backdrop-filter: blur(28px) saturate(190%);
+  border: var(--hairline) solid rgba(125, 211, 252, 0.22);
   box-shadow:
-    inset 0 1px 0 0 rgba(255, 255, 255, 0.32),
-    0 16px 40px -4px rgba(0, 0, 0, 0.85);
+    var(--specular-top-hero),
+    0 18px 42px -6px rgba(0, 0, 0, 0.85);
 }
 
 .glass-card-hero::before {
   content: '';
   position: absolute;
-  top: -50px;
-  right: -40px;
-  width: 170px;
-  height: 170px;
+  top: -54px;
+  right: -42px;
+  width: 190px;
+  height: 190px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(255, 255, 255, 0.11) 0%, transparent 70%);
+  background: radial-gradient(
+    circle,
+    rgba(90, 200, 250, 0.14) 0%,
+    rgba(56, 189, 248, 0.04) 45%,
+    transparent 72%
+  );
   pointer-events: none;
 }
 
 .glass-well {
   border-radius: var(--radius-md);
   padding: 12px 14px;
-  background: rgba(10, 10, 13, 0.68);
-  border: 1px solid rgba(255, 255, 255, 0.07);
+  background: var(--glass-fill-recessed);
+  border: var(--hairline) solid var(--border-hairline);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+.hairline-divider-top {
+  border-top: var(--hairline) solid var(--border-hairline);
 }
 
 /* Typography Helpers */
@@ -64,6 +94,8 @@
   line-height: 44px;
   letter-spacing: -0.03em;
   color: var(--primary);
+  font-variant-numeric: tabular-nums lining-nums;
+  font-feature-settings: "tnum" 1, "lnum" 1;
 }
 
 .stat-amount {
@@ -72,6 +104,8 @@
   line-height: 32px;
   letter-spacing: -0.02em;
   color: var(--primary);
+  font-variant-numeric: tabular-nums lining-nums;
+  font-feature-settings: "tnum" 1, "lnum" 1;
 }
 
 .card-title {
@@ -79,7 +113,7 @@
   font-weight: 600;
   line-height: 22px;
   letter-spacing: -0.01em;
-  color: var(--primary);
+  color: var(--text-primary);
 }
 
 .text-subtle {
@@ -87,13 +121,21 @@
   color: var(--text-secondary);
 }
 
+.text-sky {
+  color: var(--sky-light);
+}
+
+.text-warn {
+  color: var(--signal-warn);
+}
+
 /* Capsule Buttons */
 .btn-primary-capsule {
   height: 48px;
   padding: 0 20px;
   border-radius: var(--radius-full);
-  background: #ffffff;
-  color: #000000;
+  background: linear-gradient(180deg, var(--sky-light) 0%, var(--sky) 50%, var(--sky-vivid) 100%);
+  color: var(--on-sky);
   font-size: 15px;
   font-weight: 600;
   display: inline-flex;
@@ -101,9 +143,11 @@
   justify-content: center;
   gap: 8px;
   box-shadow:
-    0 4px 16px rgba(255, 255, 255, 0.16),
-    inset 0 1px 0 #ffffff;
-  transition: transform 0.15s ease, opacity 0.15s ease;
+    0 6px 20px rgba(56, 189, 248, 0.26),
+    inset 0 1px 0 rgba(255, 255, 255, 0.56);
+  transition:
+    transform var(--dur-tap) var(--ease-ios),
+    opacity var(--dur-tap) ease;
 }
 
 .btn-primary-capsule:active {
@@ -111,29 +155,52 @@
   opacity: 0.92;
 }
 
+.btn-primary-capsule:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
 .btn-glass-capsule {
   height: 40px;
   padding: 0 14px;
   border-radius: var(--radius-full);
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.20);
-  color: var(--primary);
+  background: rgba(255, 255, 255, 0.055);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border: var(--hairline) solid var(--border-hairline-strong);
+  box-shadow: var(--specular-top);
+  color: var(--text-primary);
   font-size: 13px;
   font-weight: 500;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 6px;
-  transition: transform 0.15s ease, background 0.15s ease;
+  transition:
+    transform var(--dur-tap) var(--ease-ios),
+    background-color var(--dur-fast) ease,
+    border-color var(--dur-fast) ease;
 }
 
 .btn-glass-capsule:hover {
-  background: rgba(255, 255, 255, 0.13);
+  background: rgba(255, 255, 255, 0.095);
 }
 
 .btn-glass-capsule:active {
-  transform: scale(0.96);
+  transform: scale(0.97);
+}
+
+.btn-sync-pill,
+.btn-glass-capsule:has(.pulse-dot) {
+  background: var(--sky-tint-subtle);
+  border-color: var(--sky-border);
+  color: var(--sky-light);
+  box-shadow: inset 0 1px 0 rgba(125, 211, 252, 0.18);
+}
+
+.btn-sync-pill:hover,
+.btn-glass-capsule:has(.pulse-dot):hover {
+  background: var(--sky-tint);
 }
 
 /* Badges & Status Pills */
@@ -146,50 +213,135 @@
   font-size: 11px;
   font-weight: 600;
   letter-spacing: 0.02em;
-  background: rgba(255, 255, 255, 0.09);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(20px) saturate(170%);
+  -webkit-backdrop-filter: blur(20px) saturate(170%);
+  border: var(--hairline) solid var(--border-hairline-strong);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12);
   color: var(--secondary);
 }
 
-.badge-pill-solid {
-  background: #ffffff;
-  color: #000000;
-  border-color: #ffffff;
+.badge-pill-sky,
+.badge-pill-solid,
+.badge-pill:has(.pulse-dot) {
+  background: var(--sky-tint);
+  border-color: var(--sky-border);
+  color: var(--sky-light);
+  box-shadow: inset 0 1px 0 rgba(125, 211, 252, 0.18);
 }
 
+/* Sky-Blue Breathing Live Indicator (GPU transform + opacity only) */
 .pulse-dot {
-  width: 6px;
-  height: 6px;
+  position: relative;
+  width: 7px;
+  height: 7px;
   border-radius: 50%;
-  background: #ffffff;
-  box-shadow: 0 0 8px #ffffff;
+  background: var(--sky);
+  box-shadow: 0 0 8px rgba(90, 200, 250, 0.75);
+  flex-shrink: 0;
 }
 
-/* Monochromatic Progress Bar */
+.pulse-dot::after {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  background: rgba(90, 200, 250, 0.42);
+  pointer-events: none;
+  animation: skyPulseBreath 2.6s var(--ease-ios) infinite;
+}
+
+@keyframes skyPulseBreath {
+  0% {
+    transform: scale(0.72);
+    opacity: 0.75;
+  }
+  70% {
+    transform: scale(1.75);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1.75);
+    opacity: 0;
+  }
+}
+
+/* Sky-Blue Progress Bar with Luminous Tip */
 .progress-track {
   width: 100%;
   height: 6px;
   border-radius: var(--radius-full);
-  background: rgba(255, 255, 255, 0.10);
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.45);
   overflow: hidden;
 }
 
 .progress-fill {
+  position: relative;
+  overflow: hidden;
   height: 100%;
   border-radius: var(--radius-full);
-  background: #ffffff;
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-  transition: width 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+  background: linear-gradient(90deg, #0ea5e9 0%, #38bdf8 55%, #7dd3fc 100%);
+  box-shadow: 0 0 10px rgba(90, 200, 250, 0.35);
+  transform-origin: left center;
+  transition: width var(--dur-bar) var(--ease-ios);
 }
 
-/* Segmented Control (iOS Monochrome Pill) */
+.progress-fill::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 20px;
+  border-radius: var(--radius-full);
+  background: radial-gradient(
+    circle at right center,
+    rgba(240, 249, 255, 0.96) 0%,
+    rgba(125, 211, 252, 0.45) 55%,
+    transparent 100%
+  );
+  pointer-events: none;
+}
+
+.view-section.view-entering .progress-fill {
+  animation: progressReveal var(--dur-bar) var(--ease-ios) 90ms both;
+}
+
+@keyframes progressReveal {
+  from {
+    transform: scaleX(0);
+    opacity: 0.5;
+  }
+  to {
+    transform: scaleX(1);
+    opacity: 1;
+  }
+}
+
+.progress-fill-warn {
+  background: linear-gradient(90deg, #b58b42 0%, #e2b86b 100%);
+  box-shadow: 0 0 10px rgba(226, 184, 107, 0.28);
+}
+
+.progress-fill-warn::after {
+  background: radial-gradient(
+    circle at right center,
+    rgba(254, 243, 199, 0.9) 0%,
+    rgba(226, 184, 107, 0.4) 55%,
+    transparent 100%
+  );
+}
+
+/* Segmented Control (iOS Liquid Glass Pill) */
 .segmented-control {
   display: flex;
   align-items: center;
   padding: 3px;
   border-radius: var(--radius-full);
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.045);
+  border: var(--hairline) solid var(--border-hairline);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
   gap: 2px;
   overflow-x: auto;
 }
@@ -204,14 +356,24 @@
   color: var(--text-secondary);
   text-align: center;
   white-space: nowrap;
-  transition: all 0.18s ease;
+  border: var(--hairline) solid transparent;
+  transition:
+    transform var(--dur-tap) var(--ease-ios),
+    background-color var(--dur-fast) ease,
+    color var(--dur-fast) ease,
+    border-color var(--dur-fast) ease;
+}
+
+.segmented-btn:active {
+  transform: scale(0.96);
 }
 
 .segmented-btn.active {
-  background: #ffffff;
-  color: #000000;
+  background: rgba(90, 200, 250, 0.16);
+  color: var(--sky-light);
+  border-color: rgba(90, 200, 250, 0.34);
   font-weight: 600;
-  box-shadow: 0 2px 10px rgba(255, 255, 255, 0.2);
+  box-shadow: inset 0 1px 0 rgba(125, 211, 252, 0.24);
 }
 
 /* Native iOS Liquid Toggle Switch */
@@ -219,19 +381,26 @@
   width: 51px;
   height: 31px;
   border-radius: var(--radius-full);
-  background: rgba(255, 255, 255, 0.14);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.12);
+  border: var(--hairline) solid var(--border-hairline-strong);
   padding: 2px;
   display: inline-flex;
   align-items: center;
   position: relative;
-  transition: background 0.22s ease, border-color 0.22s ease;
+  transition:
+    background-color 220ms var(--ease-ios),
+    border-color 220ms var(--ease-ios),
+    transform var(--dur-tap) var(--ease-ios);
   flex-shrink: 0;
 }
 
+.ios-switch:active {
+  transform: scale(0.95);
+}
+
 .ios-switch[aria-checked="true"] {
-  background: #ffffff;
-  border-color: #ffffff;
+  background: linear-gradient(180deg, var(--sky) 0%, var(--sky-vivid) 100%);
+  border-color: rgba(125, 211, 252, 0.65);
 }
 
 .ios-switch-knob {
@@ -241,29 +410,30 @@
   background: #ffffff;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.45);
   transform: translateX(0);
-  transition: transform 0.22s cubic-bezier(0.175, 0.885, 0.32, 1.275), background 0.22s ease;
+  transition: transform 240ms var(--ease-ios-spring);
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .ios-switch[aria-checked="true"] .ios-switch-knob {
-  background: #000000;
-  color: #ffffff;
+  background: #ffffff;
+  color: var(--on-sky);
   transform: translateX(20px);
 }
 
-/* Icon Squircle Container */
+/* Monochrome Frosted Icon Squircle Container */
 .icon-squircle {
   width: 40px;
   height: 40px;
   border-radius: 13px;
-  background: rgba(255, 255, 255, 0.07);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.045);
+  border: var(--hairline) solid var(--border-hairline-strong);
+  box-shadow: var(--specular-top);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--primary);
+  color: var(--secondary);
   flex-shrink: 0;
 }
 
@@ -281,23 +451,34 @@
   font-size: 14px;
   font-weight: 500;
   color: var(--text-primary);
-  transition: all 0.15s ease;
+  font-variant-numeric: tabular-nums lining-nums;
+  font-feature-settings: "tnum" 1, "lnum" 1;
+  transition:
+    transform var(--dur-tap) var(--ease-ios),
+    background-color var(--dur-fast) ease,
+    color var(--dur-fast) ease;
 }
 
 .cal-day-btn:hover {
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.07);
+}
+
+.cal-day-btn:active {
+  transform: scale(0.93);
 }
 
 .cal-day-btn.is-today {
-  border: 1px solid rgba(255, 255, 255, 0.45);
+  border: var(--hairline) solid rgba(90, 200, 250, 0.55);
+  background: rgba(90, 200, 250, 0.07);
+  color: var(--sky-light);
   font-weight: 700;
 }
 
 .cal-day-btn.is-selected {
-  background: #ffffff;
-  color: #000000;
+  background: linear-gradient(180deg, var(--sky-light) 0%, var(--sky) 100%);
+  color: var(--on-sky);
   font-weight: 700;
-  box-shadow: 0 4px 14px rgba(255, 255, 255, 0.28);
+  box-shadow: 0 4px 16px var(--sky-glow);
 }
 
 .cal-dots {
@@ -311,11 +492,11 @@
   width: 5px;
   height: 5px;
   border-radius: 50%;
-  background: #ffffff;
+  background: var(--sky);
 }
 
 .cal-day-btn.is-selected .cal-dot-cutoff {
-  background: #000000;
+  background: var(--on-sky);
 }
 
 .cal-dot-due {
@@ -323,18 +504,22 @@
   height: 5px;
   border-radius: 50%;
   background: transparent;
-  box-shadow: inset 0 0 0 1.5px #ffffff;
+  box-shadow: inset 0 0 0 1.5px var(--signal-warn);
 }
 
 .cal-day-btn.is-selected .cal-dot-due {
-  box-shadow: inset 0 0 0 1.5px #000000;
+  box-shadow: inset 0 0 0 1.5px var(--on-sky);
 }
 
 .cal-dot-recurring {
   width: 5px;
   height: 5px;
   border-radius: 50%;
-  background: #8e9192;
+  background: rgba(255, 255, 255, 0.55);
+}
+
+.cal-day-btn.is-selected .cal-dot-recurring {
+  background: rgba(2, 17, 27, 0.55);
 }
 
 /* Liquid Bottom Sheet Modals (Level 3) */
@@ -342,21 +527,22 @@
   position: fixed;
   inset: 0;
   z-index: 60;
-  background: rgba(0, 0, 0, 0.76);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  background: rgba(0, 0, 0, 0.72);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   align-items: center;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.25s ease;
+  transition: opacity var(--dur-sheet-out) ease;
 }
 
 .modal-overlay.open {
   opacity: 1;
   pointer-events: auto;
+  transition: opacity 240ms var(--ease-ios);
 }
 
 .bottom-sheet {
@@ -365,16 +551,19 @@
   max-height: 92dvh;
   overflow-y: auto;
   border-radius: var(--radius-sheet) var(--radius-sheet) 0 0;
-  background: var(--glass-fill-sheet);
-  backdrop-filter: blur(40px) saturate(190%);
-  -webkit-backdrop-filter: blur(40px) saturate(190%);
-  border-top: 1px solid rgba(255, 255, 255, 0.28);
+  background: linear-gradient(180deg, rgba(18, 22, 29, 0.90) 0%, rgba(10, 12, 16, 0.96) 100%);
+  backdrop-filter: blur(28px) saturate(185%);
+  -webkit-backdrop-filter: blur(28px) saturate(185%);
+  border-top: var(--hairline) solid rgba(255, 255, 255, 0.22);
+  border-left: var(--hairline) solid var(--border-hairline);
+  border-right: var(--hairline) solid var(--border-hairline);
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.35),
-    0 -12px 40px rgba(0, 0, 0, 0.92);
-  padding: 12px var(--screen-margin) calc(var(--safe-bottom) + 20px);
+    inset 0 1px 0 rgba(255, 255, 255, 0.24),
+    0 -16px 48px rgba(0, 0, 0, 0.92);
+  padding: 12px var(--screen-margin) calc(var(--safe-bottom) + 24px);
   transform: translateY(100%);
-  transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: transform var(--dur-sheet-out) var(--ease-ios-exit);
+  will-change: transform;
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -382,13 +571,14 @@
 
 .modal-overlay.open .bottom-sheet {
   transform: translateY(0);
+  transition: transform var(--dur-sheet-in) var(--ease-ios);
 }
 
 .sheet-handle {
   width: 38px;
   height: 5px;
   border-radius: var(--radius-full);
-  background: rgba(255, 255, 255, 0.28);
+  background: rgba(255, 255, 255, 0.24);
   margin: 2px auto 6px;
 }
 
@@ -400,14 +590,21 @@
   min-height: 50px;
   padding: 0 14px;
   border-radius: 14px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  transition: border-color 0.18s ease, box-shadow 0.18s ease;
+  background: rgba(255, 255, 255, 0.045);
+  border: var(--hairline) solid var(--border-hairline-strong);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  transition:
+    border-color var(--dur-fast) ease,
+    background-color var(--dur-fast) ease,
+    box-shadow var(--dur-fast) ease;
 }
 
 .input-well:focus-within {
   border-color: var(--border-focus);
-  box-shadow: inset 0 0 12px rgba(255, 255, 255, 0.05);
+  background: rgba(90, 200, 250, 0.045);
+  box-shadow:
+    0 0 0 3px rgba(90, 200, 250, 0.14),
+    inset 0 1px 0 rgba(125, 211, 252, 0.16);
 }
 
 .input-well input,
@@ -416,25 +613,31 @@
   background: transparent;
   border: none;
   outline: none;
-  color: var(--primary);
+  color: var(--text-primary);
   font-size: 16px;
+}
+
+.input-well input::placeholder {
+  color: var(--text-muted);
 }
 
 .input-well input:-webkit-autofill,
 .input-well input:-webkit-autofill:hover,
 .input-well input:-webkit-autofill:focus {
-  -webkit-text-fill-color: var(--primary);
-  caret-color: var(--primary);
-  box-shadow: 0 0 0 1000px transparent inset;
+  -webkit-text-fill-color: #f8fafc !important;
+  caret-color: var(--sky);
+  -webkit-box-shadow: 0 0 0 1000px #0d1117 inset !important;
+  box-shadow: 0 0 0 1000px #0d1117 inset !important;
+  border-radius: 10px;
   transition: background-color 9999s ease-in-out 0s;
 }
 
 .input-well select option {
-  background: #18181b;
-  color: #ffffff;
+  background: #0d1117;
+  color: #f8fafc;
 }
 
-/* Liquid Glass Monochromatic Checkbox (44px+ touch target) */
+/* Liquid Glass Sky-Accented Checkbox (44px+ touch target) */
 .glass-checkbox-row {
   position: relative;
   display: flex;
@@ -461,31 +664,37 @@
   width: 22px;
   height: 22px;
   border-radius: 7px;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.22);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.16);
+  background: rgba(255, 255, 255, 0.055);
+  border: var(--hairline) solid rgba(255, 255, 255, 0.22);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.14);
   display: inline-flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  transition: background 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease, transform 0.12s ease;
+  transition:
+    background-color var(--dur-fast) ease,
+    border-color var(--dur-fast) ease,
+    box-shadow var(--dur-fast) ease,
+    transform var(--dur-tap) var(--ease-ios);
 }
 
 .glass-checkbox-check {
   font-size: 16px;
   font-weight: 700;
-  color: #000000;
+  color: var(--on-sky);
   opacity: 0;
   transform: scale(0.65);
-  transition: opacity 0.16s ease, transform 0.16s cubic-bezier(0.22, 1, 0.36, 1);
+  transition:
+    opacity 160ms ease,
+    transform 180ms var(--ease-ios);
 }
 
 .glass-checkbox-input:checked + .glass-checkbox-box {
-  background: #ffffff;
-  border-color: #ffffff;
+  background: linear-gradient(180deg, var(--sky-light) 0%, var(--sky) 100%);
+  border-color: var(--sky-light);
   box-shadow:
-    0 2px 10px rgba(255, 255, 255, 0.22),
-    inset 0 1px 0 #ffffff;
+    0 2px 10px rgba(90, 200, 250, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.55);
 }
 
 .glass-checkbox-input:checked + .glass-checkbox-box .glass-checkbox-check {
@@ -494,7 +703,7 @@
 }
 
 .glass-checkbox-input:focus-visible + .glass-checkbox-box {
-  outline: 2px solid rgba(255, 255, 255, 0.65);
+  outline: 2px solid var(--sky);
   outline-offset: 2px;
 }
 
@@ -507,41 +716,50 @@
   font-weight: 500;
   color: var(--text-secondary);
   line-height: 18px;
-  transition: color 0.16s ease;
+  transition: color 160ms ease;
 }
 
 .glass-checkbox-input:checked ~ .glass-checkbox-label {
-  color: var(--primary);
+  color: var(--text-primary);
 }
 
-/* Monochromatic Touch Keypad */
+/* Liquid Glass Touch Keypad */
 .keypad-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 8px;
   padding: 10px;
   border-radius: var(--radius-lg);
-  background: rgba(8, 8, 10, 0.85);
-  border: 1px solid rgba(255, 255, 255, 0.07);
+  background: rgba(8, 10, 14, 0.85);
+  border: var(--hairline) solid var(--border-hairline);
 }
 
 .keypad-btn {
   height: 46px;
   border-radius: var(--radius-full);
-  background: rgba(255, 255, 255, 0.07);
-  color: var(--primary);
+  background: rgba(255, 255, 255, 0.055);
+  border: var(--hairline) solid rgba(255, 255, 255, 0.08);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  color: var(--text-primary);
   font-size: 20px;
   font-weight: 600;
+  font-variant-numeric: tabular-nums lining-nums;
+  font-feature-settings: "tnum" 1, "lnum" 1;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background 0.12s ease, color 0.12s ease, transform 0.1s ease;
+  transition:
+    background-color 120ms ease,
+    color 120ms ease,
+    border-color 120ms ease,
+    transform var(--dur-tap) var(--ease-ios);
 }
 
 .keypad-btn:active {
-  background: #ffffff;
-  color: #000000;
-  transform: scale(0.96);
+  background: var(--sky-tint-strong);
+  border-color: var(--sky-border);
+  color: var(--sky-light);
+  transform: scale(0.94);
 }
 
 /* Selectable Account / Category / MSI Pills */
@@ -558,22 +776,33 @@
   gap: 6px;
   padding: 9px 14px;
   border-radius: var(--radius-full);
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.10);
+  background: rgba(255, 255, 255, 0.05);
+  border: var(--hairline) solid var(--border-hairline-strong);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
   color: var(--text-secondary);
   font-size: 13px;
   font-weight: 500;
   white-space: nowrap;
   flex-shrink: 0;
-  transition: all 0.15s ease;
+  transition:
+    transform var(--dur-tap) var(--ease-ios),
+    background-color var(--dur-fast) ease,
+    border-color var(--dur-fast) ease,
+    color var(--dur-fast) ease;
+}
+
+.choice-pill:active {
+  transform: scale(0.96);
 }
 
 .choice-pill.active {
-  background: #ffffff;
-  color: #000000;
-  border-color: #ffffff;
+  background: var(--sky-tint);
+  color: var(--sky-light);
+  border-color: var(--sky-border-strong);
   font-weight: 600;
-  box-shadow: 0 2px 12px rgba(255, 255, 255, 0.22);
+  box-shadow:
+    inset 0 1px 0 rgba(125, 211, 252, 0.26),
+    0 4px 14px rgba(56, 189, 248, 0.14);
 }
 
 .category-grid {
@@ -590,46 +819,99 @@
   gap: 4px;
   padding: 10px 6px;
   border-radius: var(--radius-md);
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.045);
+  border: var(--hairline) solid var(--border-hairline);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.07);
   color: var(--text-secondary);
   font-size: 11px;
   font-weight: 500;
   text-align: center;
-  transition: all 0.15s ease;
+  transition:
+    transform var(--dur-tap) var(--ease-ios),
+    background-color var(--dur-fast) ease,
+    border-color var(--dur-fast) ease,
+    color var(--dur-fast) ease;
+}
+
+.category-tile:active {
+  transform: scale(0.96);
 }
 
 .category-tile.active {
-  background: rgba(255, 255, 255, 0.18);
-  border-color: #ffffff;
-  color: #ffffff;
+  background: var(--sky-tint);
+  border-color: var(--sky-border-strong);
+  color: var(--sky-light);
   font-weight: 600;
+  box-shadow: inset 0 1px 0 rgba(125, 211, 252, 0.24);
 }
 
-/* Toast Notification */
+/* Liquid Glass Toast Notification */
 .toast-banner {
   position: fixed;
-  bottom: calc(var(--safe-bottom) + 86px);
+  bottom: calc(var(--safe-bottom) + 92px);
   left: 50%;
   transform: translateX(-50%) translateY(16px);
   z-index: 80;
   padding: 10px 18px;
   border-radius: var(--radius-full);
-  background: #ffffff;
-  color: #000000;
+  background: rgba(14, 19, 27, 0.88);
+  backdrop-filter: blur(24px) saturate(185%);
+  -webkit-backdrop-filter: blur(24px) saturate(185%);
+  border: var(--hairline) solid var(--sky-border);
+  box-shadow:
+    var(--specular-top),
+    0 12px 32px rgba(0, 0, 0, 0.82);
+  color: var(--text-primary);
   font-size: 13px;
   font-weight: 600;
   display: flex;
   align-items: center;
   gap: 8px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.85);
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.22s ease, transform 0.22s ease;
+  transition:
+    opacity 220ms var(--ease-ios),
+    transform 240ms var(--ease-ios);
   white-space: nowrap;
+}
+
+.toast-banner .material-symbols-outlined {
+  color: var(--sky);
 }
 
 .toast-banner.visible {
   opacity: 1;
   transform: translateX(-50%) translateY(0);
+}
+
+/* Accessibility: Respect User Reduced Motion Preference */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .pulse-dot::after {
+    display: none;
+  }
+
+  .glass-card-interactive:active,
+  .glass-card[data-action]:active,
+  .carousel-card:active,
+  .btn-primary-capsule:active,
+  .btn-glass-capsule:active,
+  .nav-item:active,
+  .nav-fab:active,
+  .segmented-btn:active,
+  .ios-switch:active,
+  .cal-day-btn:active,
+  .keypad-btn:active,
+  .choice-pill:active,
+  .category-tile:active,
+  .glass-checkbox-row:active .glass-checkbox-box {
+    transform: none !important;
+  }
 }

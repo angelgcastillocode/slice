@@ -30,8 +30,8 @@ export function openReconcileModal(overlayEl, accountId, handlers) {
           <span class="label-eyebrow">Arqueo de Liquidez</span>
           <h3 class="card-title" style="margin:2px 0 0 0;font-size:20px;">${account.name}</h3>
         </div>
-        <button type="button" class="btn-glass-capsule" style="width:34px;height:34px;padding:0;" data-action="close-reconcile">
-          <span class="material-symbols-outlined" style="font-size:18px;">close</span>
+        <button type="button" class="btn-glass-capsule" style="width:34px;height:34px;padding:0;" data-action="close-reconcile" aria-label="Cerrar">
+          <span class="material-symbols-outlined" aria-hidden="true" style="font-size:18px;">close</span>
         </button>
       </div>
 
@@ -81,7 +81,11 @@ export function openReconcileModal(overlayEl, accountId, handlers) {
     </div>
   `;
 
-  overlayEl.classList.add('open');
+  overlayEl.classList.remove('open');
+  void overlayEl.offsetWidth;
+  requestAnimationFrame(() => {
+    overlayEl.classList.add('open');
+  });
 
   const inputEl = overlayEl.querySelector('#reconcile-real-input');
   const deltaEl = overlayEl.querySelector('#reconcile-delta-preview');
@@ -90,6 +94,12 @@ export function openReconcileModal(overlayEl, accountId, handlers) {
     const observedCents = parseMXNToCents(inputEl.value);
     const { deltaCents } = computeReconciliationDelta(currentSystemCents, observedCents);
     deltaEl.textContent = formatCentsToMXN(deltaCents, { signed: true, withCode: true });
+    deltaEl.style.color =
+      deltaCents > 0
+        ? 'var(--sky-light)'
+        : deltaCents < 0
+        ? 'var(--error)'
+        : 'var(--text-secondary)';
   }
 
   inputEl?.addEventListener('input', updateDeltaPreview);

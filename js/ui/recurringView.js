@@ -61,11 +61,11 @@ export function renderRecurringView(container, state, handlers) {
                 ${rec.name}
               </span>
               <div class="text-subtle" style="font-size:12px;display:flex;align-items:center;gap:6px;flex-wrap:wrap;">
-                <span>Día ${dayStr}</span>
+                <span class="tabular-nums">Día ${dayStr}</span>
                 <span>•</span>
                 <span>${methodLabel}</span>
                 <span>•</span>
-                <span class="tabular-nums" style="color:#fff;font-weight:600;">${formatCentsToMXN(rec.amount_cents)}</span>
+                <span class="tabular-nums" style="color:var(--text-primary);font-weight:600;">${formatCentsToMXN(rec.amount_cents)}</span>
               </div>
             </div>
           </div>
@@ -146,7 +146,7 @@ export function renderRecurringView(container, state, handlers) {
             <div class="progress-fill" style="width:${paidPct}%;"></div>
           </div>
           <div class="tabular-nums" style="display:flex;align-items:center;justify-content:space-between;font-size:11px;">
-            <span style="color:#fff;font-weight:500;">● ${formatCentsToMXN(paidFijosCents)} pagados</span>
+            <span style="color:var(--sky-light);font-weight:500;">● ${formatCentsToMXN(paidFijosCents)} pagados</span>
             <span style="color:var(--text-secondary);">○ ${formatCentsToMXN(pendingFijosCents)} pendientes</span>
           </div>
         </div>
@@ -156,15 +156,15 @@ export function renderRecurringView(container, state, handlers) {
       <div class="glass-card" style="padding:15px 18px;display:flex;align-items:center;justify-content:space-between;">
         <div style="display:flex;align-items:center;gap:12px;">
           <div class="icon-squircle" style="border-radius:50%;">
-            <span class="material-symbols-outlined">account_balance_wallet</span>
+            <span class="material-symbols-outlined" aria-hidden="true">account_balance_wallet</span>
           </div>
           <div>
             <span class="label-eyebrow" style="display:block;font-size:10px;">Total Por Cobrar ("Me deben")</span>
             <span class="card-title tabular-nums" style="font-size:20px;">${formatCentsToMXN(metrics.totalReceivableLoansCents)} <span style="font-size:11px;color:var(--text-secondary);font-weight:400;">MXN</span></span>
           </div>
         </div>
-        <span class="badge-pill">
-          <span class="material-symbols-outlined" style="font-size:14px;">group</span>
+        <span class="badge-pill badge-pill-sky tabular-nums">
+          <span class="material-symbols-outlined" aria-hidden="true" style="font-size:14px;">group</span>
           <span>${metrics.activeLoansCount} activo${metrics.activeLoansCount === 1 ? '' : 's'}</span>
         </span>
       </div>

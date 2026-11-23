@@ -33,12 +33,14 @@ export function renderDashboardView(container, state, handlers) {
 
   // Closest upcoming cutoff days across active cards
   let nextCutoffDaysLabel = 'Sin tarjetas activas';
+  let nextCutoffSoon = false;
   if (metrics.cardSummaries.length > 0) {
     const sortedByCutoff = [...metrics.cardSummaries].sort(
       (a, b) => a.cycleInfo.daysUntilCutoff - b.cycleInfo.daysUntilCutoff
     );
     const nearest = sortedByCutoff[0];
     const days = nearest.cycleInfo.daysUntilCutoff;
+    nextCutoffSoon = days <= 3;
     nextCutoffDaysLabel =
       days === 0
         ? `${nearest.card.name} corta hoy`
@@ -83,9 +85,9 @@ export function renderDashboardView(container, state, handlers) {
               <div class="glass-card carousel-card" style="display:flex;flex-direction:column;justify-content:space-between;gap:14px;">
                 <div style="display:flex;align-items:center;justify-content:space-between;">
                   <div class="icon-squircle" style="border-radius:50%;width:36px;height:36px;">
-                    <span class="material-symbols-outlined" style="font-size:19px;">${icon}</span>
+                    <span class="material-symbols-outlined" aria-hidden="true" style="font-size:19px;">${icon}</span>
                   </div>
-                  <span class="badge-pill ${isPrimary ? 'badge-pill-solid' : ''}">${badge}</span>
+                  <span class="badge-pill ${isPrimary ? 'badge-pill-sky' : ''}">${badge}</span>
                 </div>
                 <div>
                   <span class="text-subtle" style="display:block;font-size:12px;">${acc.name}</span>
@@ -153,7 +155,7 @@ export function renderDashboardView(container, state, handlers) {
                   </div>
                 </div>
                 <div style="display:flex;flex-direction:column;align-items:flex-end;flex-shrink:0;">
-                  <span class="tabular-nums" style="font-size:16px;font-weight:600;color:${isInflow ? '#ffffff' : 'var(--secondary)'};">
+                  <span class="tabular-nums" style="font-size:16px;font-weight:600;color:${isInflow ? 'var(--sky-light)' : 'var(--secondary)'};">
                     ${signAmount}
                   </span>
                   <span class="label-eyebrow" style="font-size:10px;">MXN</span>
@@ -171,14 +173,14 @@ export function renderDashboardView(container, state, handlers) {
         <span class="card-title" style="font-size:19px;">Hola, Angel</span>
       </div>
       <div style="display:flex;align-items:center;gap:6px;">
-        <button type="button" class="btn-glass-capsule" style="width:34px;height:34px;padding:0;" data-action="prev-month" aria-label="Mes anterior">
-          <span class="material-symbols-outlined" style="font-size:18px;">chevron_left</span>
+        <button type="button" class="btn-glass-capsule" style="width:36px;height:36px;padding:0;" data-action="prev-month" aria-label="Mes anterior">
+          <span class="material-symbols-outlined" aria-hidden="true" style="font-size:18px;">chevron_left</span>
         </button>
-        <span class="badge-pill" style="padding:6px 12px;font-size:12px;color:#fff;">
+        <span class="badge-pill badge-pill-sky" style="padding:6px 12px;font-size:12px;">
           ${formatMonthYearLabel(state.selectedYearMonth)}
         </span>
-        <button type="button" class="btn-glass-capsule" style="width:34px;height:34px;padding:0;" data-action="next-month" aria-label="Mes siguiente">
-          <span class="material-symbols-outlined" style="font-size:18px;">chevron_right</span>
+        <button type="button" class="btn-glass-capsule" style="width:36px;height:36px;padding:0;" data-action="next-month" aria-label="Mes siguiente">
+          <span class="material-symbols-outlined" aria-hidden="true" style="font-size:18px;">chevron_right</span>
         </button>
       </div>
     </div>
@@ -187,8 +189,8 @@ export function renderDashboardView(container, state, handlers) {
     <div class="glass-card-hero">
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
         <span class="label-eyebrow">Liquidez Libre del Mes</span>
-        <span class="badge-pill">
-          <span class="pulse-dot"></span>
+        <span class="badge-pill badge-pill-sky">
+          <span class="pulse-dot" aria-hidden="true"></span>
           <span>En vivo</span>
         </span>
       </div>
@@ -197,13 +199,13 @@ export function renderDashboardView(container, state, handlers) {
         <span style="font-size:16px;font-weight:500;color:var(--text-secondary);">MXN</span>
       </div>
       <p class="text-subtle" style="margin:0 0 16px 0;display:flex;align-items:center;gap:6px;">
-        <span class="material-symbols-outlined" style="font-size:16px;color:var(--secondary);">verified_user</span>
-        <span>Total líquido (${formatCentsToMXN(metrics.totalLiquidCents)}) menos pagos exigibles del mes</span>
+        <span class="material-symbols-outlined" aria-hidden="true" style="font-size:16px;color:var(--sky);">verified_user</span>
+        <span>Total líquido (<span class="tabular-nums">${formatCentsToMXN(metrics.totalLiquidCents)}</span>) menos pagos exigibles del mes</span>
       </p>
 
       <div class="glass-well" style="display:flex;flex-direction:column;gap:8px;">
         <div style="display:flex;align-items:center;justify-content:space-between;font-size:11px;">
-          <span style="color:#fff;font-weight:600;">${committedPct}% comprometido en el mes</span>
+          <span class="tabular-nums" style="color:var(--text-primary);font-weight:600;">${committedPct}% comprometido en el mes</span>
           <span class="tabular-nums" style="color:var(--text-secondary);">
             ${formatCentsToMXN(totalCommitmentsCents)} por cubrir
           </span>
@@ -219,10 +221,10 @@ export function renderDashboardView(container, state, handlers) {
       <div style="display:flex;align-items:center;justify-content:space-between;">
         <div style="display:flex;align-items:baseline;gap:8px;">
           <h2 class="card-title" style="margin:0;">Cuentas de Liquidez</h2>
-          <span class="label-eyebrow">${metrics.accountsBreakdown.length} activas</span>
+          <span class="label-eyebrow tabular-nums">${metrics.accountsBreakdown.length} activas</span>
         </div>
         <button type="button" class="btn-glass-capsule" style="height:30px;padding:0 10px;font-size:11px;" data-action="open-new-account">
-          <span class="material-symbols-outlined" style="font-size:14px;">add</span>
+          <span class="material-symbols-outlined" aria-hidden="true" style="font-size:14px;">add</span>
           <span>Cuenta</span>
         </button>
       </div>
@@ -239,15 +241,15 @@ export function renderDashboardView(container, state, handlers) {
       </div>
 
       <!-- 1. Acumulado Próximo Corte -->
-      <div class="glass-card" style="padding:14px 16px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;" data-action="go-tab" data-tab="tarjetas">
+      <div class="glass-card glass-card-interactive" style="padding:14px 16px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;" data-action="go-tab" data-tab="tarjetas">
         <div style="display:flex;align-items:center;gap:12px;min-width:0;">
           <div class="icon-squircle" style="border-radius:50%;">
-            <span class="material-symbols-outlined" style="font-size:20px;">event_upcoming</span>
+            <span class="material-symbols-outlined" aria-hidden="true" style="font-size:20px;">event_upcoming</span>
           </div>
           <div style="display:flex;flex-direction:column;min-width:0;">
-            <span style="font-size:14px;font-weight:600;color:#fff;">Acumulado Próximo Corte</span>
+            <span style="font-size:14px;font-weight:600;color:var(--text-primary);">Acumulado Próximo Corte</span>
             <span class="text-subtle" style="font-size:11px;display:flex;align-items:center;gap:5px;">
-              <span style="width:6px;height:6px;border-radius:50%;background:var(--secondary);display:inline-block;"></span>
+              <span style="width:6px;height:6px;border-radius:50%;background:${nextCutoffSoon ? 'var(--signal-warn)' : 'var(--sky)'};display:inline-block;flex-shrink:0;"></span>
               ${nextCutoffDaysLabel}
             </span>
           </div>
@@ -259,14 +261,14 @@ export function renderDashboardView(container, state, handlers) {
       </div>
 
       <!-- 2. Deuda Total MSI -->
-      <div class="glass-card" style="padding:14px 16px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;" data-action="go-tab" data-tab="tarjetas">
+      <div class="glass-card glass-card-interactive" style="padding:14px 16px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;" data-action="go-tab" data-tab="tarjetas">
         <div style="display:flex;align-items:center;gap:12px;min-width:0;">
           <div class="icon-squircle" style="border-radius:50%;">
-            <span class="material-symbols-outlined" style="font-size:20px;">credit_card</span>
+            <span class="material-symbols-outlined" aria-hidden="true" style="font-size:20px;">credit_card</span>
           </div>
           <div style="display:flex;flex-direction:column;min-width:0;">
-            <span style="font-size:14px;font-weight:600;color:#fff;">Deuda Total Comprometida MSI</span>
-            <span class="text-subtle" style="font-size:11px;">${activeMsiCount} compra${activeMsiCount === 1 ? '' : 's'} activa${activeMsiCount === 1 ? '' : 's'}</span>
+            <span style="font-size:14px;font-weight:600;color:var(--text-primary);">Deuda Total Comprometida MSI</span>
+            <span class="text-subtle tabular-nums" style="font-size:11px;">${activeMsiCount} compra${activeMsiCount === 1 ? '' : 's'} activa${activeMsiCount === 1 ? '' : 's'}</span>
           </div>
         </div>
         <div style="display:flex;align-items:baseline;gap:4px;flex-shrink:0;">
@@ -276,18 +278,18 @@ export function renderDashboardView(container, state, handlers) {
       </div>
 
       <!-- 3. Me deben (Por cobrar) -->
-      <div class="glass-card" style="padding:14px 16px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;" data-action="go-tab" data-tab="fijos">
+      <div class="glass-card glass-card-interactive" style="padding:14px 16px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;" data-action="go-tab" data-tab="fijos">
         <div style="display:flex;align-items:center;gap:12px;min-width:0;">
           <div class="icon-squircle" style="border-radius:50%;">
-            <span class="material-symbols-outlined" style="font-size:20px;">handshake</span>
+            <span class="material-symbols-outlined" aria-hidden="true" style="font-size:20px;">handshake</span>
           </div>
           <div style="display:flex;flex-direction:column;min-width:0;">
-            <span style="font-size:14px;font-weight:600;color:#fff;">Me deben (Por cobrar)</span>
-            <span class="text-subtle" style="font-size:11px;">${metrics.activeLoansCount} préstamo${metrics.activeLoansCount === 1 ? '' : 's'} pendiente${metrics.activeLoansCount === 1 ? '' : 's'}</span>
+            <span style="font-size:14px;font-weight:600;color:var(--text-primary);">Me deben (Por cobrar)</span>
+            <span class="text-subtle tabular-nums" style="font-size:11px;">${metrics.activeLoansCount} préstamo${metrics.activeLoansCount === 1 ? '' : 's'} pendiente${metrics.activeLoansCount === 1 ? '' : 's'}</span>
           </div>
         </div>
         <div style="display:flex;align-items:baseline;gap:4px;flex-shrink:0;">
-          <span class="card-title tabular-nums">+${formatCentsToMXN(metrics.totalReceivableLoansCents)}</span>
+          <span class="card-title tabular-nums" style="color:var(--sky-light);">+${formatCentsToMXN(metrics.totalReceivableLoansCents)}</span>
           <span class="label-eyebrow" style="font-size:10px;">MXN</span>
         </div>
       </div>

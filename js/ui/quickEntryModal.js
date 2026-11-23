@@ -57,7 +57,11 @@ export function openQuickEntryModal(overlayEl, handlers, initialMode = 'expense'
     description: ''
   };
   renderQuickEntryModal(overlayEl, handlers);
-  overlayEl.classList.add('open');
+  overlayEl.classList.remove('open');
+  void overlayEl.offsetWidth;
+  requestAnimationFrame(() => {
+    overlayEl.classList.add('open');
+  });
 
   if (!window.__sliceQuickEntryKeyBound) {
     window.__sliceQuickEntryKeyBound = true;
@@ -282,7 +286,7 @@ export function renderQuickEntryModal(overlayEl, handlers) {
                     (m) => `
                       <button
                         type="button"
-                        class="choice-pill ${modalState.msiMonths === m ? 'active' : ''}"
+                        class="choice-pill tabular-nums ${modalState.msiMonths === m ? 'active' : ''}"
                         style="justify-content:center;padding:8px 0;"
                         data-action="select-qe-msi-months"
                         data-months="${m}"

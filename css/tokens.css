@@ -1,40 +1,76 @@
 /* ============================================================================
-   Slice Design System - Liquid Glass Monochromatic (iOS Spatial OLED)
-   Reference: liquid_glass_monochromatic/DESIGN.md
+   Slice Design System - OLED Liquid Glass + Sky Blue (iOS Spatial PWA)
    ============================================================================ */
 
 :root {
-  /* Core Monochromatic OLED Palette */
-  --bg-canvas: #000000;
-  --surface-lowest: #0a0a0c;
-  --surface-low: #131316;
-  --surface-container: #1b1b1f;
-  --surface-high: #242429;
-  --surface-highest: #323238;
-  --surface-bright: #3e3e46;
+  color-scheme: dark;
 
-  /* Typography & Hierarchy */
+  /* Core OLED Canvas & Cool Dark Surfaces */
+  --bg-canvas: #000000;
+  --surface-lowest: #050608;
+  --surface-low: #0b0d11;
+  --surface-container: #111419;
+  --surface-high: #171b22;
+  --surface-highest: #232833;
+
+  /* Sky Blue Accent Palette */
+  --sky: #5AC8FA;
+  --sky-vivid: #38BDF8;
+  --sky-light: #7DD3FC;
+  --on-sky: #02111B;
+  --sky-tint-subtle: rgba(90, 200, 250, 0.07);
+  --sky-tint: rgba(90, 200, 250, 0.12);
+  --sky-tint-strong: rgba(90, 200, 250, 0.20);
+  --sky-border: rgba(90, 200, 250, 0.28);
+  --sky-border-strong: rgba(125, 211, 252, 0.44);
+  --sky-glow: rgba(90, 200, 250, 0.34);
+
+  /* Typography & WCAG AA Hierarchy */
   --primary: #ffffff;
   --on-primary: #000000;
-  --secondary: #e4e4e7;
-  --text-primary: #ffffff;
-  --text-secondary: #a1a1aa;
-  --text-muted: #71717a;
-  --error: #ffb4ab;
+  --secondary: #e2e8f0;
+  --text-primary: #f8fafc;
+  --text-secondary: #a1a9b5;
+  --text-muted: #8a93a2;
+
+  /* Restrained Secondary Signals */
+  --signal-warn: #e2b86b;
+  --signal-warn-tint: rgba(226, 184, 107, 0.12);
+  --signal-warn-border: rgba(226, 184, 107, 0.28);
+  --error: #f59e9b;
+  --error-tint: rgba(245, 158, 155, 0.10);
+  --error-border: rgba(245, 158, 155, 0.28);
 
   /* Liquid Glass Materials */
-  --glass-fill-base: rgba(255, 255, 255, 0.055);
-  --glass-fill-elevated: rgba(255, 255, 255, 0.09);
-  --glass-fill-recessed: rgba(14, 14, 17, 0.72);
-  --glass-fill-sheet: rgba(16, 16, 20, 0.92);
-  --glass-fill-nav: rgba(20, 20, 24, 0.76);
+  --glass-fill-top: rgba(255, 255, 255, 0.058);
+  --glass-fill-bottom: rgba(255, 255, 255, 0.032);
+  --glass-fill-base: rgba(255, 255, 255, 0.045);
+  --glass-fill-elevated: rgba(255, 255, 255, 0.068);
+  --glass-fill-recessed: rgba(8, 10, 14, 0.66);
+  --glass-fill-header: rgba(0, 0, 0, 0.60);
+  --glass-fill-nav: rgba(14, 18, 24, 0.72);
+  --glass-fill-sheet: rgba(12, 15, 20, 0.90);
 
-  /* Specular Borders & Strokes */
-  --border-specular-top: rgba(255, 255, 255, 0.24);
-  --border-specular-mid: rgba(255, 255, 255, 0.12);
-  --border-specular-bottom: rgba(255, 255, 255, 0.04);
-  --border-subtle: rgba(255, 255, 255, 0.08);
-  --border-focus: rgba(255, 255, 255, 0.45);
+  /* Retina Hairline Borders & Specular Highlights */
+  --hairline: 1px;
+  --border-hairline: rgba(255, 255, 255, 0.08);
+  --border-hairline-strong: rgba(255, 255, 255, 0.14);
+  --border-subtle: var(--border-hairline);
+  --border-focus: rgba(90, 200, 250, 0.55);
+  --specular-top: inset 0 1px 0 rgba(255, 255, 255, 0.14);
+  --specular-top-hero: inset 0 1px 0 rgba(255, 255, 255, 0.22);
+  --specular-top-float: inset 0 1px 0 rgba(255, 255, 255, 0.20);
+
+  /* iOS Motion Tokens */
+  --ease-ios: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-ios-spring: cubic-bezier(0.34, 1.48, 0.64, 1);
+  --ease-ios-exit: cubic-bezier(0.4, 0, 1, 1);
+  --dur-tap: 140ms;
+  --dur-fast: 180ms;
+  --dur-view: 260ms;
+  --dur-sheet-in: 300ms;
+  --dur-sheet-out: 220ms;
+  --dur-bar: 520ms;
 
   /* Radii (Squircle & Capsule Geometry) */
   --radius-xs: 8px;
@@ -52,12 +88,20 @@
   --space-lg: 20px;
   --space-xl: 28px;
   --screen-margin: 20px;
-  --safe-top: env(safe-area-inset-top, 16px);
-  --safe-bottom: env(safe-area-inset-bottom, 20px);
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
 
   /* Typography Engine */
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', sans-serif;
   --font-mono: 'SF Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 2dppx) {
+  :root {
+    --hairline: 0.5px;
+    --border-hairline: rgba(255, 255, 255, 0.11);
+    --border-hairline-strong: rgba(255, 255, 255, 0.18);
+  }
 }
 
 *,
@@ -65,6 +109,11 @@
 *::after {
   box-sizing: border-box;
   -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  scroll-padding-top: calc(var(--safe-top) + 72px);
+  scroll-padding-bottom: calc(var(--safe-bottom) + 120px);
 }
 
 html,
@@ -77,14 +126,15 @@ body {
   color: var(--text-primary);
   font-family: var(--font-sans);
   font-size: 15px;
-  line-height: 1.4;
+  line-height: 1.45;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overscroll-behavior-y: none;
 }
 
 /* Pure Tabular Numerals for all Financial Values */
-.tabular-nums {
+.tabular-nums,
+input[type="number"] {
   font-variant-numeric: tabular-nums lining-nums;
   font-feature-settings: "tnum" 1, "lnum" 1;
 }
@@ -104,9 +154,28 @@ select {
   color: inherit;
 }
 
+button,
+a,
+label,
+input,
+select,
+[data-action] {
+  touch-action: manipulation;
+}
+
 button {
   cursor: pointer;
   border: none;
   background: none;
   padding: 0;
+}
+
+:focus-visible {
+  outline: 2px solid var(--sky);
+  outline-offset: 2px;
+}
+
+.input-well input:focus-visible,
+.input-well select:focus-visible {
+  outline: none;
 }

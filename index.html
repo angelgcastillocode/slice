@@ -40,7 +40,7 @@
   <div
     id="auth-screen"
     class="app-container"
-    style="display:none;justify-content:center;padding:24px var(--screen-margin);"
+    style="display:none;"
   >
     <div class="glass-card-hero" style="display:flex;flex-direction:column;gap:20px;padding:28px 22px;">
       <div style="display:flex;flex-direction:column;align-items:center;text-align:center;gap:10px;">
@@ -64,7 +64,7 @@
         <div style="display:flex;flex-direction:column;gap:6px;">
           <label class="label-eyebrow" for="auth-email">Correo Electrónico</label>
           <div class="input-well">
-            <span class="material-symbols-outlined" style="font-size:19px;color:var(--text-secondary);">mail</span>
+            <span class="material-symbols-outlined" aria-hidden="true" style="font-size:19px;color:var(--text-secondary);">mail</span>
             <input
               type="email"
               name="email"
@@ -83,7 +83,7 @@
         <div style="display:flex;flex-direction:column;gap:6px;">
           <label class="label-eyebrow" for="auth-password">Contraseña</label>
           <div class="input-well">
-            <span class="material-symbols-outlined" style="font-size:19px;color:var(--text-secondary);">lock</span>
+            <span class="material-symbols-outlined" aria-hidden="true" style="font-size:19px;color:var(--text-secondary);">lock</span>
             <input
               type="password"
               name="password"
@@ -104,7 +104,7 @@
             checked
           />
           <span class="glass-checkbox-box" aria-hidden="true">
-            <span class="material-symbols-outlined glass-checkbox-check">check</span>
+            <span class="material-symbols-outlined glass-checkbox-check" aria-hidden="true">check</span>
           </span>
           <span class="glass-checkbox-label">Recordar sesión y correo</span>
         </label>
@@ -112,7 +112,7 @@
         <div
           id="auth-error-box"
           class="glass-well"
-          style="display:none;color:var(--error);font-size:13px;border-color:rgba(255,180,171,0.3);"
+          style="display:none;color:var(--error);font-size:13px;background:var(--error-tint);border-color:var(--error-border);"
         ></div>
 
         <button
@@ -121,13 +121,13 @@
           class="btn-primary-capsule"
           style="width:100%;height:52px;margin-top:4px;"
         >
-          <span class="material-symbols-outlined" style="font-size:20px;">login</span>
+          <span class="material-symbols-outlined" aria-hidden="true" style="font-size:20px;">login</span>
           <span id="auth-submit-text">Iniciar Sesión</span>
         </button>
       </form>
 
       <div style="display:flex;align-items:center;justify-content:center;gap:6px;padding-top:4px;">
-        <span class="material-symbols-outlined" style="font-size:15px;color:var(--text-secondary);">shield_lock</span>
+        <span class="material-symbols-outlined" aria-hidden="true" style="font-size:15px;color:var(--sky);">shield_lock</span>
         <span class="label-eyebrow" style="font-size:10px;">PostgreSQL RLS • Usuario Único</span>
       </div>
     </div>
@@ -147,12 +147,12 @@
         <div class="header-actions">
           <button
             type="button"
-            class="btn-glass-capsule"
+            class="btn-glass-capsule btn-sync-pill"
             id="btn-open-data-controls"
-            style="height:32px;padding:0 11px;font-size:11px;"
+            style="height:34px;padding:0 12px;font-size:11px;"
             title="Estado de conexión con Supabase y sesión"
           >
-            <span class="pulse-dot" id="sync-status-dot"></span>
+            <span class="pulse-dot" id="sync-status-dot" aria-hidden="true"></span>
             <span id="sync-status-label">Supabase</span>
           </button>
         </div>
@@ -167,16 +167,19 @@
       <section id="view-recurring" class="view-section" aria-label="Gastos Fijos y Préstamos"></section>
     </main>
 
+    <!-- Soft Bottom Scrim behind Floating Dock -->
+    <div class="bottom-fade-scrim" aria-hidden="true"></div>
+
     <!-- Floating Liquid Navigation Bar -->
     <div class="floating-nav-wrapper">
       <nav class="floating-nav" aria-label="Navegación principal">
         <button type="button" class="nav-item active" data-tab="inicio">
-          <span class="material-symbols-outlined" style="font-size:22px;">home</span>
+          <span class="material-symbols-outlined" aria-hidden="true" style="font-size:22px;">home</span>
           <span class="nav-item-label">Inicio</span>
         </button>
 
         <button type="button" class="nav-item" data-tab="calendario">
-          <span class="material-symbols-outlined" style="font-size:22px;">calendar_today</span>
+          <span class="material-symbols-outlined" aria-hidden="true" style="font-size:22px;">calendar_today</span>
           <span class="nav-item-label">Calendario</span>
         </button>
 
@@ -186,16 +189,16 @@
           id="btn-open-quick-entry"
           aria-label="Nuevo Movimiento Rápido"
         >
-          <span class="material-symbols-outlined" style="font-size:26px;font-weight:700;">add</span>
+          <span class="material-symbols-outlined" aria-hidden="true" style="font-size:26px;font-weight:700;">add</span>
         </button>
 
         <button type="button" class="nav-item" data-tab="tarjetas">
-          <span class="material-symbols-outlined" style="font-size:22px;">credit_card</span>
+          <span class="material-symbols-outlined" aria-hidden="true" style="font-size:22px;">credit_card</span>
           <span class="nav-item-label">Tarjetas</span>
         </button>
 
         <button type="button" class="nav-item" data-tab="fijos">
-          <span class="material-symbols-outlined" style="font-size:22px;">repeat</span>
+          <span class="material-symbols-outlined" aria-hidden="true" style="font-size:22px;">repeat</span>
           <span class="nav-item-label">Fijos</span>
         </button>
       </nav>
@@ -213,7 +216,7 @@
 
   <!-- Toast Feedback -->
   <div id="toast-banner" class="toast-banner" role="status" aria-live="polite">
-    <span class="material-symbols-outlined" style="font-size:18px;">check_circle</span>
+    <span class="material-symbols-outlined" aria-hidden="true" style="font-size:18px;">check_circle</span>
     <span id="toast-text">Acción completada</span>
   </div>
 

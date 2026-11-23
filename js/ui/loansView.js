@@ -31,7 +31,7 @@ export function renderLoansSection(state) {
               <div class="glass-card" style="padding:18px;display:flex;flex-direction:column;gap:14px;">
                 <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:10px;">
                   <div style="display:flex;align-items:center;gap:12px;">
-                    <div class="icon-squircle" style="border-radius:50%;font-weight:700;font-size:14px;">
+                    <div class="icon-squircle" style="border-radius:50%;font-weight:700;font-size:14px;border-color:var(--sky-border);color:var(--sky-light);">
                       ${initials}
                     </div>
                     <div>
@@ -50,9 +50,9 @@ export function renderLoansSection(state) {
                 <div class="glass-well" style="display:flex;flex-direction:column;gap:6px;">
                   <div style="display:flex;justify-content:space-between;font-size:11px;">
                     <span style="color:var(--text-secondary);">
-                      Total prestado: <strong class="tabular-nums" style="color:#fff;">${formatCentsToMXN(loan.principal_cents)}</strong>
+                      Total prestado: <strong class="tabular-nums" style="color:var(--text-primary);">${formatCentsToMXN(loan.principal_cents)}</strong>
                     </span>
-                    <span style="color:#fff;font-weight:600;">${pct}% devuelto</span>
+                    <span class="tabular-nums" style="color:var(--sky-light);font-weight:600;">${pct}% devuelto</span>
                   </div>
                   <div class="progress-track">
                     <div class="progress-fill" style="width:${pct}%;"></div>

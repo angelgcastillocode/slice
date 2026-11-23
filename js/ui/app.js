@@ -42,6 +42,17 @@ const TAB_TITLES = {
 };
 
 let toastTimer = null;
+let lastRenderedTab = null;
+let viewEnterTimer = null;
+
+function revealModalOverlay(overlayEl) {
+  if (!overlayEl) return;
+  overlayEl.classList.remove('open');
+  void overlayEl.offsetWidth;
+  requestAnimationFrame(() => {
+    overlayEl.classList.add('open');
+  });
+}
 
 export function showToast(message) {
   const toastEl = document.getElementById('toast-banner');
@@ -161,6 +172,7 @@ function toggleAuthVsAppScreen(isAuthenticated) {
 
 function renderApp(state) {
   if (!state.user) {
+    lastRenderedTab = null;
     toggleAuthVsAppScreen(false);
     return;
   }
@@ -196,10 +208,15 @@ function renderApp(state) {
     fijos: document.getElementById('view-recurring')
   };
 
+  const tabChanged = state.activeTab !== lastRenderedTab;
+
   for (const [tabKey, sectionEl] of Object.entries(views)) {
     if (!sectionEl) continue;
     const isActive = tabKey === state.activeTab;
     sectionEl.classList.toggle('active', isActive);
+    if (tabChanged) {
+      sectionEl.classList.remove('view-entering');
+    }
   }
 
   const handlers = getHandlers();
@@ -211,6 +228,19 @@ function renderApp(state) {
     renderCardsView(views.tarjetas, state, handlers);
   } else if (state.activeTab === 'fijos' && views.fijos) {
     renderRecurringView(views.fijos, state, handlers);
+  }
+
+  if (tabChanged) {
+    const activeSection = views[state.activeTab];
+    if (activeSection) {
+      void activeSection.offsetWidth;
+      activeSection.classList.add('view-entering');
+      if (viewEnterTimer) clearTimeout(viewEnterTimer);
+      viewEnterTimer = setTimeout(() => {
+        activeSection.classList.remove('view-entering');
+      }, 650);
+    }
+    lastRenderedTab = state.activeTab;
   }
 }
 
@@ -239,8 +269,8 @@ function openLoanRepaymentModal(overlayEl, loanId) {
           <span class="label-eyebrow">Abono Directo ("Me deben")</span>
           <h3 class="card-title" style="margin:2px 0 0 0;font-size:20px;">${loan.borrower_name}</h3>
         </div>
-        <button type="button" class="btn-glass-capsule" style="width:34px;height:34px;padding:0;" data-action="close-aux">
-          <span class="material-symbols-outlined" style="font-size:18px;">close</span>
+        <button type="button" class="btn-glass-capsule" style="width:34px;height:34px;padding:0;" data-action="close-aux" aria-label="Cerrar">
+          <span class="material-symbols-outlined" aria-hidden="true" style="font-size:18px;">close</span>
         </button>
       </div>
 
@@ -258,8 +288,8 @@ function openLoanRepaymentModal(overlayEl, loanId) {
       </div>
 
       <div style="display:flex;gap:8px;">
-        <button type="button" class="btn-glass-capsule" style="flex:1;" data-quick-abono="50">+$50</button>
-        <button type="button" class="btn-glass-capsule" style="flex:1;" data-quick-abono="100">+$100</button>
+        <button type="button" class="btn-glass-capsule tabular-nums" style="flex:1;" data-quick-abono="50">+$50</button>
+        <button type="button" class="btn-glass-capsule tabular-nums" style="flex:1;" data-quick-abono="100">+$100</button>
         <button type="button" class="btn-glass-capsule" style="flex:1;" data-quick-abono="full">Liquidar Total</button>
       </div>
 
@@ -271,13 +301,13 @@ function openLoanRepaymentModal(overlayEl, loanId) {
       </div>
 
       <button type="button" class="btn-primary-capsule" style="width:100%;" id="aux-confirm-abono">
-        <span class="material-symbols-outlined" style="font-size:18px;">check_circle</span>
+        <span class="material-symbols-outlined" aria-hidden="true" style="font-size:18px;">check_circle</span>
         <span>Confirmar Abono</span>
       </button>
     </div>
   `;
 
-  overlayEl.classList.add('open');
+  revealModalOverlay(overlayEl);
 
   const inputEl = overlayEl.querySelector('#aux-abono-amount');
   overlayEl.querySelectorAll('[data-quick-abono]').forEach((btn) => {
@@ -333,8 +363,8 @@ function openPayCardModal(overlayEl, { cardId, cycleYM, suggestedAmountCents }) 
           <span class="label-eyebrow">Pago de Tarjeta de Crédito</span>
           <h3 class="card-title" style="margin:2px 0 0 0;font-size:20px;">${card.name} (Ciclo ${cycleYM})</h3>
         </div>
-        <button type="button" class="btn-glass-capsule" style="width:34px;height:34px;padding:0;" data-action="close-aux">
-          <span class="material-symbols-outlined" style="font-size:18px;">close</span>
+        <button type="button" class="btn-glass-capsule" style="width:34px;height:34px;padding:0;" data-action="close-aux" aria-label="Cerrar">
+          <span class="material-symbols-outlined" aria-hidden="true" style="font-size:18px;">close</span>
         </button>
       </div>
 
@@ -354,13 +384,13 @@ function openPayCardModal(overlayEl, { cardId, cycleYM, suggestedAmountCents }) 
       </div>
 
       <button type="button" class="btn-primary-capsule" style="width:100%;" id="aux-confirm-cardpay">
-        <span class="material-symbols-outlined" style="font-size:18px;">check_circle</span>
+        <span class="material-symbols-outlined" aria-hidden="true" style="font-size:18px;">check_circle</span>
         <span>Registrar Pago de Tarjeta</span>
       </button>
     </div>
   `;
 
-  overlayEl.classList.add('open');
+  revealModalOverlay(overlayEl);
 
   overlayEl.querySelector('[data-action="close-aux"]')?.addEventListener('click', () => {
     overlayEl.classList.remove('open');
@@ -391,8 +421,8 @@ function openNewCardModal(overlayEl) {
       <div class="sheet-handle"></div>
       <div style="display:flex;align-items:center;justify-content:space-between;">
         <h3 class="card-title" style="margin:0;font-size:19px;">Nueva Tarjeta de Crédito</h3>
-        <button type="button" class="btn-glass-capsule" style="width:34px;height:34px;padding:0;" data-action="close-aux">
-          <span class="material-symbols-outlined" style="font-size:18px;">close</span>
+        <button type="button" class="btn-glass-capsule" style="width:34px;height:34px;padding:0;" data-action="close-aux" aria-label="Cerrar">
+          <span class="material-symbols-outlined" aria-hidden="true" style="font-size:18px;">close</span>
         </button>
       </div>
 
@@ -404,15 +434,15 @@ function openNewCardModal(overlayEl) {
       <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;">
         <div style="display:flex;flex-direction:column;gap:4px;">
           <span class="label-eyebrow" style="font-size:10px;">Día Corte (1-31)</span>
-          <div class="input-well"><input type="number" min="1" max="31" id="new-card-cutoff" value="15" /></div>
+          <div class="input-well"><input type="number" min="1" max="31" id="new-card-cutoff" class="tabular-nums" value="15" /></div>
         </div>
         <div style="display:flex;flex-direction:column;gap:4px;">
           <span class="label-eyebrow" style="font-size:10px;">Día Pago (1-31)</span>
-          <div class="input-well"><input type="number" min="1" max="31" id="new-card-due" value="5" /></div>
+          <div class="input-well"><input type="number" min="1" max="31" id="new-card-due" class="tabular-nums" value="5" /></div>
         </div>
         <div style="display:flex;flex-direction:column;gap:4px;">
           <span class="label-eyebrow" style="font-size:10px;">Últimos 4</span>
-          <div class="input-well"><input type="text" maxlength="4" id="new-card-last4" placeholder="4821" /></div>
+          <div class="input-well"><input type="text" maxlength="4" id="new-card-last4" class="tabular-nums" placeholder="4821" /></div>
         </div>
       </div>
 
@@ -420,7 +450,7 @@ function openNewCardModal(overlayEl) {
         <span class="label-eyebrow" style="font-size:10px;">Límite de Crédito Opcional (MXN)</span>
         <div class="input-well">
           <span>$</span>
-          <input type="number" inputmode="decimal" id="new-card-limit" placeholder="25000.00" />
+          <input type="number" inputmode="decimal" id="new-card-limit" class="tabular-nums" placeholder="25000.00" />
         </div>
       </div>
 
@@ -430,7 +460,7 @@ function openNewCardModal(overlayEl) {
     </div>
   `;
 
-  overlayEl.classList.add('open');
+  revealModalOverlay(overlayEl);
   overlayEl.querySelector('[data-action="close-aux"]')?.addEventListener('click', () => {
     overlayEl.classList.remove('open');
   });
@@ -460,8 +490,8 @@ function openNewAccountModal(overlayEl) {
       <div class="sheet-handle"></div>
       <div style="display:flex;align-items:center;justify-content:space-between;">
         <h3 class="card-title" style="margin:0;font-size:19px;">Nueva Cuenta de Liquidez</h3>
-        <button type="button" class="btn-glass-capsule" style="width:34px;height:34px;padding:0;" data-action="close-aux">
-          <span class="material-symbols-outlined" style="font-size:18px;">close</span>
+        <button type="button" class="btn-glass-capsule" style="width:34px;height:34px;padding:0;" data-action="close-aux" aria-label="Cerrar">
+          <span class="material-symbols-outlined" aria-hidden="true" style="font-size:18px;">close</span>
         </button>
       </div>
 
@@ -478,7 +508,7 @@ function openNewAccountModal(overlayEl) {
         </div>
         <div class="input-well">
           <span>$</span>
-          <input type="number" inputmode="decimal" id="new-acc-balance" placeholder="Saldo inicial" />
+          <input type="number" inputmode="decimal" id="new-acc-balance" class="tabular-nums" placeholder="Saldo inicial" />
         </div>
       </div>
 
@@ -488,7 +518,7 @@ function openNewAccountModal(overlayEl) {
     </div>
   `;
 
-  overlayEl.classList.add('open');
+  revealModalOverlay(overlayEl);
   overlayEl.querySelector('[data-action="close-aux"]')?.addEventListener('click', () => {
     overlayEl.classList.remove('open');
   });
@@ -524,8 +554,8 @@ function openNewRecurringModal(overlayEl) {
       <div class="sheet-handle"></div>
       <div style="display:flex;align-items:center;justify-content:space-between;">
         <h3 class="card-title" style="margin:0;font-size:19px;">Nuevo Gasto Fijo / Suscripción</h3>
-        <button type="button" class="btn-glass-capsule" style="width:34px;height:34px;padding:0;" data-action="close-aux">
-          <span class="material-symbols-outlined" style="font-size:18px;">close</span>
+        <button type="button" class="btn-glass-capsule" style="width:34px;height:34px;padding:0;" data-action="close-aux" aria-label="Cerrar">
+          <span class="material-symbols-outlined" aria-hidden="true" style="font-size:18px;">close</span>
         </button>
       </div>
 
@@ -536,10 +566,10 @@ function openNewRecurringModal(overlayEl) {
       <div style="display:grid;grid-template-columns:1.3fr 1fr;gap:10px;">
         <div class="input-well">
           <span>$</span>
-          <input type="number" inputmode="decimal" id="new-rec-amount" placeholder="Monto MXN" />
+          <input type="number" inputmode="decimal" id="new-rec-amount" class="tabular-nums" placeholder="Monto MXN" />
         </div>
         <div class="input-well">
-          <input type="number" min="1" max="31" id="new-rec-day" placeholder="Día cobro (1-31)" value="8" />
+          <input type="number" min="1" max="31" id="new-rec-day" class="tabular-nums" placeholder="Día cobro (1-31)" value="8" />
         </div>
       </div>
 
@@ -556,7 +586,7 @@ function openNewRecurringModal(overlayEl) {
     </div>
   `;
 
-  overlayEl.classList.add('open');
+  revealModalOverlay(overlayEl);
   overlayEl.querySelector('[data-action="close-aux"]')?.addEventListener('click', () => {
     overlayEl.classList.remove('open');
   });
@@ -597,8 +627,8 @@ function openNewLoanModal(overlayEl) {
       <div class="sheet-handle"></div>
       <div style="display:flex;align-items:center;justify-content:space-between;">
         <h3 class="card-title" style="margin:0;font-size:19px;">Nuevo Préstamo ("Me deben")</h3>
-        <button type="button" class="btn-glass-capsule" style="width:34px;height:34px;padding:0;" data-action="close-aux">
-          <span class="material-symbols-outlined" style="font-size:18px;">close</span>
+        <button type="button" class="btn-glass-capsule" style="width:34px;height:34px;padding:0;" data-action="close-aux" aria-label="Cerrar">
+          <span class="material-symbols-outlined" aria-hidden="true" style="font-size:18px;">close</span>
         </button>
       </div>
 
@@ -613,7 +643,7 @@ function openNewLoanModal(overlayEl) {
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
         <div class="input-well">
           <span>$</span>
-          <input type="number" inputmode="decimal" id="new-loan-amount" placeholder="Monto MXN" />
+          <input type="number" inputmode="decimal" id="new-loan-amount" class="tabular-nums" placeholder="Monto MXN" />
         </div>
         <div class="input-well">
           <select id="new-loan-account">${accountOptions}</select>
@@ -626,7 +656,7 @@ function openNewLoanModal(overlayEl) {
     </div>
   `;
 
-  overlayEl.classList.add('open');
+  revealModalOverlay(overlayEl);
   overlayEl.querySelector('[data-action="close-aux"]')?.addEventListener('click', () => {
     overlayEl.classList.remove('open');
   });
@@ -654,8 +684,8 @@ function openEditMsiInstallmentModal(overlayEl, { installmentId, currentCents })
       <div class="sheet-handle"></div>
       <div style="display:flex;align-items:center;justify-content:space-between;">
         <h3 class="card-title" style="margin:0;font-size:18px;">Ajustar Parcialidad MSI</h3>
-        <button type="button" class="btn-glass-capsule" style="width:34px;height:34px;padding:0;" data-action="close-aux">
-          <span class="material-symbols-outlined" style="font-size:18px;">close</span>
+        <button type="button" class="btn-glass-capsule" style="width:34px;height:34px;padding:0;" data-action="close-aux" aria-label="Cerrar">
+          <span class="material-symbols-outlined" aria-hidden="true" style="font-size:18px;">close</span>
         </button>
       </div>
       <p class="text-subtle" style="margin:0;">
@@ -663,7 +693,7 @@ function openEditMsiInstallmentModal(overlayEl, { installmentId, currentCents })
       </p>
       <div class="input-well">
         <span>$</span>
-        <input type="number" inputmode="decimal" step="0.01" id="edit-msi-inst-input" value="${(currentCents / 100).toFixed(2)}" />
+        <input type="number" inputmode="decimal" step="0.01" id="edit-msi-inst-input" class="tabular-nums" value="${(currentCents / 100).toFixed(2)}" />
       </div>
       <button type="button" class="btn-primary-capsule" style="width:100%;" id="save-msi-inst-btn">
         <span>Actualizar Parcialidad</span>
@@ -671,7 +701,7 @@ function openEditMsiInstallmentModal(overlayEl, { installmentId, currentCents })
     </div>
   `;
 
-  overlayEl.classList.add('open');
+  revealModalOverlay(overlayEl);
   overlayEl.querySelector('[data-action="close-aux"]')?.addEventListener('click', () => {
     overlayEl.classList.remove('open');
   });
@@ -700,8 +730,8 @@ function openSessionAndSyncModal(overlayEl) {
           <span class="label-eyebrow">Supabase Cloud • RLS Activo</span>
           <h3 class="card-title" style="margin:2px 0 0 0;font-size:19px;">Sesión &amp; Sincronización</h3>
         </div>
-        <button type="button" class="btn-glass-capsule" style="width:34px;height:34px;padding:0;" data-action="close-aux">
-          <span class="material-symbols-outlined" style="font-size:18px;">close</span>
+        <button type="button" class="btn-glass-capsule" style="width:34px;height:34px;padding:0;" data-action="close-aux" aria-label="Cerrar">
+          <span class="material-symbols-outlined" aria-hidden="true" style="font-size:18px;">close</span>
         </button>
       </div>
 
@@ -717,36 +747,36 @@ function openSessionAndSyncModal(overlayEl) {
             <span class="text-subtle" style="font-size:11px;">Proyecto: slice (PostgreSQL 17)</span>
           </div>
         </div>
-        <span class="badge-pill">
-          <span class="pulse-dot"></span>
+        <span class="badge-pill badge-pill-sky">
+          <span class="pulse-dot" aria-hidden="true"></span>
           <span>Online</span>
         </span>
       </div>
 
       <div style="display:flex;flex-direction:column;gap:10px;">
         <button type="button" class="btn-primary-capsule" style="width:100%;" id="btn-force-sync">
-          <span class="material-symbols-outlined" style="font-size:18px;">sync</span>
+          <span class="material-symbols-outlined" aria-hidden="true" style="font-size:18px;">sync</span>
           <span>Sincronizar con Supabase Ahora</span>
         </button>
 
         ${
           state.liquidityAccounts.length === 0
             ? `<button type="button" class="btn-glass-capsule" style="width:100%;height:46px;" id="btn-seed-base-accounts">
-                 <span class="material-symbols-outlined" style="font-size:18px;">account_balance_wallet</span>
+                 <span class="material-symbols-outlined" aria-hidden="true" style="font-size:18px;">account_balance_wallet</span>
                  <span>Crear Cuentas Base (Efectivo + Débito)</span>
                </button>`
             : ''
         }
 
-        <button type="button" class="btn-glass-capsule" style="width:100%;height:46px;color:var(--error);" id="btn-sign-out">
-          <span class="material-symbols-outlined" style="font-size:18px;">logout</span>
+        <button type="button" class="btn-glass-capsule" style="width:100%;height:46px;color:var(--error);border-color:var(--error-border);" id="btn-sign-out">
+          <span class="material-symbols-outlined" aria-hidden="true" style="font-size:18px;">logout</span>
           <span>Cerrar Sesión</span>
         </button>
       </div>
     </div>
   `;
 
-  overlayEl.classList.add('open');
+  revealModalOverlay(overlayEl);
   overlayEl.querySelector('[data-action="close-aux"]')?.addEventListener('click', () => {
     overlayEl.classList.remove('open');
   });
@@ -859,6 +889,15 @@ async function bootstrap() {
 
   document.getElementById('btn-open-data-controls')?.addEventListener('click', () => {
     getHandlers().onOpenDataControlsModal();
+  });
+
+  // Enable iOS Safari :active states on touch and Escape key dismissal for auxiliary/reconcile sheets
+  document.addEventListener('touchstart', () => {}, { passive: true });
+  window.addEventListener('keydown', (e) => {
+    if (e.key !== 'Escape') return;
+    ['modal-reconcile', 'modal-auxiliary'].forEach((id) => {
+      document.getElementById(id)?.classList.remove('open');
+    });
   });
 
   // Close overlays on backdrop click
